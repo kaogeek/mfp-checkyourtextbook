@@ -1,0 +1,35 @@
+<script>
+  import { Iconinput } from 'flowbite-svelte';
+</script>
+
+<div class="bg-searcher bg-center bg-no-repeat rounded-lg flex flex-col justify-center">
+ <div class="self-center p-5">
+  <h1 class="text-white text-2xl mb-5">เรื่องบ้งในการศึกษาไทย ยังเกิดขึ้นได้ทุกวัน</h1>
+  <div class="relative">
+    <Iconinput noBorder placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย" size="lg" class="p-4">
+      <svg
+        aria-hidden="true"
+        class="w-5 h-5 text-gray-500 dark:text-gray-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        /></svg
+      >
+    </Iconinput>
+  </div>
+ </div>
+</div>
+
+<style>
+  div.bg-searcher {
+    background-image: url('https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover;
+    height: 320px;
+  }
+</style>
