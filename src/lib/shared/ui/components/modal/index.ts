@@ -1,1 +1,2 @@
-export { default as ModalDetail } from './ModalDetail.svelte';
+export * from './modal-detail';
+export * from './modal-create';

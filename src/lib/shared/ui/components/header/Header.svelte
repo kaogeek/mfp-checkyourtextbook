@@ -5,8 +5,10 @@
     NavLi,
     NavHamburger,
     NavUl,
+    Button,
   } from 'flowbite-svelte';
-  import { Button } from '../button';
+
+  export let isOpenModalCreate: boolean = false;
 </script>
 
 <Navbar
@@ -24,7 +26,13 @@
     </span>
   </NavBrand>
   <div class="flex md:order-2">
-    <Button label="สร้าง" />
+    <Button
+      on:click={() => {
+        isOpenModalCreate = true;
+      }}
+    >
+      สร้าง</Button
+    >
     <NavHamburger on:click={toggle} />
   </div>
   <NavUl {hidden}>

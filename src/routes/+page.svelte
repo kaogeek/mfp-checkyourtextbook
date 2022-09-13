@@ -1,10 +1,17 @@
 <script lang="ts">
   // import type { User } from '$models';
-  import { Swiper, GridContent, Searcher, Submenu } from '$ui/components';
+  import {
+    Swiper,
+    GridContent,
+    Searcher,
+    Submenu,
+    ModalCreate,
+  } from '$ui/components';
   import { Heading, P } from 'flowbite-svelte';
 
   // export let data: { payload: User[] };
   // export let errors: any;
+
 </script>
 
 <svelte:head>
@@ -36,6 +43,7 @@
   >
   <GridContent />
 </section>
+
 
 <style>
 </style>

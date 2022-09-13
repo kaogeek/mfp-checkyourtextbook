@@ -7,9 +7,9 @@
     Img,
     Modal,
     P,
-    Span,
   } from 'flowbite-svelte';
-  export let isOpenModal: boolean;
+
+  export let isOpenModal: boolean = false;
 </script>
 
 <Modal

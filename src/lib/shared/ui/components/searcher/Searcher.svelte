@@ -2,11 +2,11 @@
   import { Iconinput } from 'flowbite-svelte';
 </script>
 
-<div class="bg-searcher bg-center bg-no-repeat rounded-lg flex flex-col justify-center">
- <div class="self-center p-5">
+<div class="bg-searcher bg-center bg-no-repeat rounded-lg flex flex-col justify-center self-center">
+ <div class="px-5 sm:px-28 md:px-42 lg:px-48">
   <h1 class="text-white text-2xl mb-5">เรื่องบ้งในการศึกษาไทย ยังเกิดขึ้นได้ทุกวัน</h1>
   <div class="relative">
-    <Iconinput noBorder placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย" size="lg" class="p-4">
+    <Iconinput noBorder placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย" class="p-4 h-14">
       <svg
         aria-hidden="true"
         class="w-5 h-5 text-gray-500 dark:text-gray-400"
