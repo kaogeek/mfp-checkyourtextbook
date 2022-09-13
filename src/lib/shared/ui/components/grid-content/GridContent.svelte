@@ -22,7 +22,7 @@
     }),
   ];
 
-  let isOpenModal: boolean;
+  let isOpenModal: boolean = false;
 </script>
 
 <Masonry

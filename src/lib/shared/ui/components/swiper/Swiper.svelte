@@ -24,7 +24,7 @@
   modules={[Navigation]}
   navigation={true}
 >
-  <SwiperSlide>
+  <SwiperSlide class="cursor-pointer">
     <Img
       src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg"
       class="rounded-lg h-14 w-full object-cover"
@@ -32,7 +32,7 @@
     />
 
     <div class="absolute top-50 left-50">
-      <P color="" align="center" size="sm" space="normal" weight="medium" opacity={1}
+      <P class="text-white" align="center" space="normal" weight="medium" opacity={1}
         >ประวัติศาสตร์</P
       >
     </div>
