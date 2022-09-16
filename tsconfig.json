@@ -1,38 +1,31 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true
-  },
-  // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
-  //
-  // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-  // from the referenced tsconfig.json - TypeScript does not merge them in
-  "paths": {
-    "$lib": ["src/lib"],
-    "$lib/*": ["src/lib/*"],
-    "$components": ["src/lib/shared/components"],
-    "$components/*": ["src/lib/shared/components/*"],
-    "$ui": ["src/lib/shared/ui"],
-    "$ui/*": ["src/lib/shared/ui/*"],
-    "$core": ["src/lib/core"],
-    "$core/*": ["src/lib/core/*"],
-    "$environment": ["src/lib/environments"],
-    "$utils": ["src/lib/utils"],
-    "$models": ["src/lib/models"],
-    "$models/*": ["src/lib/models/*"]
-  },
-  "include": [
-    "src/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.js",
-    "src/**/*.svelte",
-    "src/service-worker.js-"
-  ]
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true
+	},
+	"paths": {
+		"$lib": ["src/lib"],
+		"$lib/*": ["src/lib/*"],
+		"$components": ["src/lib/shared/components"],
+		"$components/*": ["src/lib/shared/components/*"],
+		"$ui": ["src/lib/shared/ui"],
+		"$ui/*": ["src/lib/shared/ui/*"],
+		"$core": ["src/lib/core"],
+		"$core/*": ["src/lib/core/*"],
+		"$environment": ["src/lib/environments"],
+		"$utils": ["src/lib/utils"],
+		"$models": ["src/lib/models"],
+		"$models/*": ["src/lib/models/*"]
+	}
+	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
+	//
+	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
+	// from the referenced tsconfig.json - TypeScript does not merge them in
 }
