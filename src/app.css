@@ -1,3 +1,4 @@
+/* Write your global styles here, in PostCSS syntax */
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
 /* Import flowbite styles */
@@ -8,6 +9,7 @@
 @import 'swiper/css';
 @import 'swiper/css/pagination';
 @import 'swiper/css/navigation';
+@tailwind base;
 
 /* Import tailwind styles */
 @tailwind base;
@@ -46,7 +48,6 @@
   display: block;
   width: 100%;
   @apply h-20;
-
 }
 
 .swiper-button-next,
@@ -64,3 +65,7 @@
 .swiper-button-next::after {
   font-size: 13px;
 }
+
+@tailwind components;
+
+@tailwind utilities;

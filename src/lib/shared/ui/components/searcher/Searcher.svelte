@@ -3,7 +3,7 @@
 </script>
 
 <div class="bg-searcher bg-center bg-no-repeat rounded-lg flex flex-col justify-center self-center">
- <div class="px-5 sm:px-28 md:px-42 lg:px-48">
+ <div class="px-5 sm:px-28 md:px-42 lg:px-72 text-center">
   <h1 class="text-white text-2xl mb-5">เรื่องบ้งในการศึกษาไทย ยังเกิดขึ้นได้ทุกวัน</h1>
   <div class="relative">
     <Iconinput noBorder placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย" class="p-4 h-14">

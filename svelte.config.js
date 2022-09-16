@@ -4,26 +4,25 @@ import { resolve } from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
-  preprocess: preprocess({
-    postcss: true,
-  }),
-  kit: {
-    adapter: adapter({ out: 'dist/mfp-checkyourtextbook' }),
-    // Override http methods in the Todo forms
-    methodOverride: {
-      allowed: ['PATCH', 'DELETE'],
-    },
-    alias: {
-      $components: resolve('./src/lib/shared/components'),
-      $core: resolve('./src/lib/core'),
-      $environment: resolve('./src/lib/environments'),
-      $models: resolve('./src/lib/models'),
-      $ui: resolve('./src/lib/shared/ui'),
-      $utils: resolve('./src/lib/utils'),
-    },
-  },
+	// Consult https://github.com/sveltejs/svelte-preprocess
+	// for more information about preprocessors
+	preprocess: [
+		preprocess({
+			postcss: true
+		})
+	],
+
+	kit: {
+		adapter: adapter({ out: 'dist/mfp-checkyourtextbook' }),
+		alias: {
+			$components: resolve('./src/lib/shared/components'),
+			$core: resolve('./src/lib/core'),
+			$environment: resolve('./src/lib/environments'),
+			$models: resolve('./src/lib/models'),
+			$ui: resolve('./src/lib/shared/ui'),
+			$utils: resolve('./src/lib/utils')
+		}
+	}
 };
 
 export default config;
