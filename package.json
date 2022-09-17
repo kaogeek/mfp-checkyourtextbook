@@ -39,6 +39,7 @@
   "dependencies": {
     "@sveltejs/adapter-netlify": "^1.0.0-next.78",
     "autoprefixer": "^10.4.11",
+    "mongodb": "^4.9.1",
     "postcss": "^8.4.16",
     "realm-web": "^1.7.1",
     "svelte-bricks": "^0.1.7",

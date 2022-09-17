@@ -21,6 +21,8 @@ const config = {
       $models: resolve('./src/lib/models'),
       $ui: resolve('./src/lib/shared/ui'),
       $utils: resolve('./src/lib/utils'),
+      $assets: resolve('./src/lib/assets'),
+
     },
   },
 };

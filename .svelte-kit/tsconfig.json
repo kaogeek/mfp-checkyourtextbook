@@ -38,6 +38,12 @@
 			"$utils/*": [
 				"src/lib/utils/*"
 			],
+			"$assets": [
+				"src/lib/assets"
+			],
+			"$assets/*": [
+				"src/lib/assets/*"
+			],
 			"$lib": [
 				"src/lib"
 			],

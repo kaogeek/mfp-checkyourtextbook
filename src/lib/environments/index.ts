@@ -1,4 +1,5 @@
 class Environments {
+  static APP_TITLE = import.meta.env.VITE_APP_TITLE;
   static REALM_APP_ID = import.meta.env.VITE_REALM_APP_ID;
   static REALM_CLUSTER_NAME = import.meta.env.VITE_REALM_CLUSTER_NAME;
   static REALM_API_KEY = import.meta.env.VITE_REALM_API_KEY;
@@ -6,8 +7,11 @@ class Environments {
 }
 
 class Configs {
-  static COLLECTION_NAME: {
-    USER: 'user';
+  static COLLECTION_NAME = {
+    USER: 'users',
+    SUBJECT: 'subjects',
+    CONTENT: 'contents',
+
   };
 }
 
