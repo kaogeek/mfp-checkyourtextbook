@@ -22,5 +22,5 @@
       class="mb-1">{description}</P
     >
   {/if}
-  <Input {size} {placeholder} class={customClass} />
+  <Input {size} {placeholder} class=bg-transparent {customClass} />
 </div>

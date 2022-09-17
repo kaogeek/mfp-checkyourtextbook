@@ -1,1 +1,2 @@
-export { default as Swiper } from './Swiper.svelte';
+export * from './class';
+export * from './subject';

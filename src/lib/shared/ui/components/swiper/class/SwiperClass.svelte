@@ -3,22 +3,7 @@
   import { Navigation } from 'swiper';
   import { Img, P } from 'flowbite-svelte';
 
-  let items: any[] = [
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-    'ประวัติศาสตร์',
-  ];
+  let items: any[] = [];
 </script>
 
 <Swiper
@@ -42,10 +27,10 @@
   navigation={true}
 >
   {#each items as item}
-    <SwiperSlide class="cursor-pointer">
+    <SwiperSlide class="rounded-2xl cursor-pointer">
       <Img
         src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg"
-        class="rounded-lg h-14 w-full object-cover"
+        class="rounded-2xl h-14 w-full object-cover"
         alt="sample 1"
       />
 
