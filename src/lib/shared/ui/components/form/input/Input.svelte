@@ -6,6 +6,7 @@
   export let placeholder: string = '';
   export let customClass: string = '';
   export let size: 'lg' | 'sm' | 'md' | undefined;
+  export let inputValue: string;
 </script>
 
 <div class="mb-6">
@@ -22,5 +23,11 @@
       class="mb-1">{description}</P
     >
   {/if}
-  <Input {size} {placeholder} class=bg-transparent {customClass} />
+  <Input
+    {size}
+    {placeholder}
+    class="bg-transparent"
+    {customClass}
+    bind:value={inputValue}
+  />
 </div>

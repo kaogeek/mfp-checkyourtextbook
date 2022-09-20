@@ -27,8 +27,8 @@
  */
 declare module '$env/static/private' {
 	export const MANPATH: string;
-	export const rvm_bin_path: string;
 	export const TERM_PROGRAM: string;
+	export const rvm_bin_path: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const GEM_HOME: string;
@@ -77,8 +77,8 @@ declare module '$env/static/private' {
 	export const npm_config_node_gyp: string;
 	export const npm_package_version: string;
 	export const XPC_SERVICE_NAME: string;
-	export const rvm_version: string;
 	export const VSCODE_INJECTION: string;
+	export const rvm_version: string;
 	export const SHLVL: string;
 	export const HOME: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
@@ -87,14 +87,14 @@ declare module '$env/static/private' {
 	export const LESS: string;
 	export const LOGNAME: string;
 	export const npm_lifecycle_script: string;
-	export const GEM_PATH: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
+	export const GEM_PATH: string;
 	export const BUN_INSTALL: string;
 	export const npm_config_user_agent: string;
-	export const INFOPATH: string;
-	export const HOMEBREW_CELLAR: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const GIT_ASKPASS: string;
+	export const INFOPATH: string;
+	export const HOMEBREW_CELLAR: string;
 	export const RUBY_VERSION: string;
 	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
@@ -137,8 +137,8 @@ declare module '$env/static/public' {
 declare module '$env/dynamic/private' {
 	export const env: {
 		MANPATH: string;
-		rvm_bin_path: string;
 		TERM_PROGRAM: string;
+		rvm_bin_path: string;
 		NODE: string;
 		INIT_CWD: string;
 		GEM_HOME: string;
@@ -187,8 +187,8 @@ declare module '$env/dynamic/private' {
 		npm_config_node_gyp: string;
 		npm_package_version: string;
 		XPC_SERVICE_NAME: string;
-		rvm_version: string;
 		VSCODE_INJECTION: string;
+		rvm_version: string;
 		SHLVL: string;
 		HOME: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
@@ -197,14 +197,14 @@ declare module '$env/dynamic/private' {
 		LESS: string;
 		LOGNAME: string;
 		npm_lifecycle_script: string;
-		GEM_PATH: string;
 		VSCODE_GIT_IPC_HANDLE: string;
+		GEM_PATH: string;
 		BUN_INSTALL: string;
 		npm_config_user_agent: string;
-		INFOPATH: string;
-		HOMEBREW_CELLAR: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		GIT_ASKPASS: string;
+		INFOPATH: string;
+		HOMEBREW_CELLAR: string;
 		RUBY_VERSION: string;
 		SECURITYSESSIONID: string;
 		npm_node_execpath: string;

@@ -62,7 +62,7 @@
           >
           <Select placeholder="ระดับชั้น" size="md" />
         </div>
-        <div class="pt-[20px]">
+        <div class="pt-[24px]">
           <Select placeholder="วิชาเรียน" size="md" />
         </div>
       </div>

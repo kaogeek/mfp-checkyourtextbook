@@ -12,17 +12,8 @@
   import type { ContentGrid, Subject } from '$models';
   import apiCall, { Endpoints } from '$core/functions/call';
 
-  const api = 'https://hn.algolia.com/api/v1/search_by_date?tags=story';
-
   let page = 1;
   let items: ContentGrid[] = [];
-
-  let imageRd = [
-    'https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg',
-    'https://pbs.twimg.com/media/ElABjdUWAAEEhA-.jpg',
-    'https://storage-wp.thaipost.net/2021/10/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B4%E0%B8%95%E0%B8%A3-%E0%B8%A7%E0%B8%87%E0%B8%A9%E0%B9%8C%E0%B8%AA%E0%B8%B8%E0%B8%A7%E0%B8%A3%E0%B8%A3%E0%B8%93-%E0%B8%9E%E0%B8%A5.%E0%B8%AD-170264.jpg',
-    'https://img.pptvhd36.com/thumbor/2020/07/31/news-3d2daa9f7e.jpg',
-  ];
 
   export let data: {
     subjects: Subject[];
@@ -33,7 +24,13 @@
   }: InfiniteEvent) {
     const contents = await apiCall(fetch, Endpoints.getContent, {
       method: 'GET',
-      pathParams: [`?page=${page}`],
+      pathParams: [
+        `?page=${page} ${
+          localStorage.getItem('userId')
+            ? `&userId=${localStorage.getItem('userId')}`
+            : ''
+        }`,
+      ],
     });
 
     page += 1;

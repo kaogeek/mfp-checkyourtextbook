@@ -1,17 +1,22 @@
 import { HttpException } from '$utils';
 
 export enum Endpoints {
+  getUserById = '/api/user/get-user-id',
   getSubject = '/api/metadata/subject',
-  getContent = '/api/content/content-scroll',
+  getContent = '/api/content/post',
+  postEngagement = '/api/content/engagement',
 }
 
 type Props = {
-  body?: BodyInit;
+  body?: any;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  pathParams?: (string | number)[];
+  pathParams?: (string | number | null)[];
 };
 
-export function getLink(endpoint: Endpoints, pathParams?: (string | number)[]) {
+export function getLink(
+  endpoint: Endpoints,
+  pathParams?: (string | number | null)[]
+) {
   return pathParams?.length ? `${endpoint}/${pathParams.join('/')}` : endpoint;
 }
 
