@@ -1,134 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="./favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta http-equiv="content-security-policy" content=""><title>หน้าหลัก</title><meta name="description" content="Svelte demo app" data-svelte="svelte-1vjt001">
-	<link href="./_app/immutable/assets/vendor-6cbca33d.css" rel="stylesheet">
-	<link href="./_app/immutable/assets/_layout-70b966a3.css" rel="stylesheet">
-	<link href="./_app/immutable/assets/_error-440b1260.css" rel="stylesheet">
-	<link href="./_app/immutable/assets/Select-4cbeed3d.css" rel="stylesheet">
-	<link rel="modulepreload" href="./_app/immutable/start-01df004d.js">
-	<link rel="modulepreload" href="./_app/immutable/chunks/vendor-4468c64d.js">
-	<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-6d9099d0.js">
-	<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-904a47a7.js">
-	<link rel="modulepreload" href="./_app/immutable/modules/pages/_page.ts-3811d5ca.js">
-	<link rel="modulepreload" href="./_app/immutable/chunks/_page-8e4d09ca.js">
-	</head>
-	<body>
-		<div>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <link
+      rel="manifest"
+      crossorigin="use-credentials"
+      href="./manifest.json"
+    />
+    <meta http-equiv="content-security-policy" content=""><title>จับบ้งหนังสือเรียน</title>
+	<link href="./_app/immutable/assets/vendor-46863ab8.css" rel="stylesheet">
+	<link href="./_app/immutable/assets/_layout-e749d8fd.css" rel="stylesheet">
+	<link href="./_app/immutable/assets/_error-6ef02139.css" rel="stylesheet">
+	<link href="./_app/immutable/assets/Searcher-77b2a79b.css" rel="stylesheet">
+	<link rel="modulepreload" href="./_app/immutable/start-a1d8e029.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/vendor-ca41893a.js">
+	<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-4bfdb031.js">
+	<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-d25b80d5.js">
+	<link rel="modulepreload" href="./_app/immutable/modules/pages/_page.ts-33ce1a35.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/http-code-e2964124.js">
+  </head>
+  <body>
+    <div>
 
 
-<nav class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 rounded-lg  border-gray-100 dark:border-gray-700 px-2 sm:px-4 py-2.5 z-[2] fixed top-0 left-0 right-0"><div class="mx-auto flex flex-wrap justify-between items-center  container"><a href="/" class="flex items-center"><img src="https://flowbite.com/docs/images/logo.svg" alt="Flowbite Logo" class="s-Z4oDrScqQuKA">
-    <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white s-Z4oDrScqQuKA">บ้ง
-    </span></a>
-  <div class="flex md:order-2 s-Z4oDrScqQuKA"><button type="button" class="text-center font-medium focus:ring-4 inline-flex items-center justify-center px-5 py-2.5 text-sm text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-lg">สร้าง</button>
-    <button type="button" class="focus:outline-none whitespace-normal rounded-lg focus:ring-2 p-1.5 hover:text-gray-900 hover:bg-gray-100 text-gray-500 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 ml-3 md:hidden" aria-label="Open main menu"><span class="sr-only">Open main menu</span>
-	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="h-6 w-6 shrink-0" aria-label="bars 3" fill="none" viewBox="0 0 24 24" stroke-width="2"><!-- HTML_TAG_START --><path d="M3.75 6.75H20.25M3.75 12H20.25M3.75 17.25H20.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <!-- HTML_TAG_END --></svg></button></div>
-  <div class="w-full md:block md:w-auto" hidden><ul class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium"><li><a href="/" class="block py-2 pr-4 pl-3 md:p-0 rounded md:border-0 text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">บ้งประถม</a></li>
-    <li><a href="/" class="block py-2 pr-4 pl-3 md:p-0 rounded md:border-0 text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">บ้งมัธยม</a></li>
-    <li><a href="/" class="block py-2 pr-4 pl-3 md:p-0 rounded md:border-0 text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">บ้งมหาลัยฯ</a></li></ul></div></div></nav>
+
+
+<nav class="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0"><div class="flex flex-wrap justify-between items-center mx-auto"><a href="/" class="flex items-center"><img src="/_app/immutable/assets/favicon-6635dbb2.png" class="mr-3 h-8 sm:h-7" alt="Checkyourtextbook Logo"></a>
+    <div class="flex md:order-2"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">สร้าง</button></div></div>
+</nav>
 <main class="pt-[60px] s-7IPF32Wcq3s8"><section class="p-4 s-7IPF32Wcq3s8">
 
-<section><div class="bg-searcher bg-center bg-no-repeat rounded-lg flex flex-col justify-center self-center s-54JR_X_9pYjX"><div class="px-5 sm:px-28 md:px-42 lg:px-72 text-center s-54JR_X_9pYjX"><h1 class="text-white text-2xl mb-5 s-54JR_X_9pYjX">เรื่องบ้งในการศึกษาไทย ยังเกิดขึ้นได้ทุกวัน</h1>
-  <div class="relative s-54JR_X_9pYjX"><div class="relative"><div class="flex absolute inset-y-0 left-0 items-center pl-3 p-2.5 text-sm pointer-events-none"><svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400 s-54JR_X_9pYjX" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" class="s-54JR_X_9pYjX"></path></svg></div>
-		<input placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-2.5 text-sm pl-10 p-4 h-14" value=""></div></div></div>
+<section><div class="bg-searcher bg-center bg-no-repeat rounded-2xl flex flex-col justify-center self-center s-54JR_X_9pYjX"><div class="px-5 sm:px-28 md:px-42 lg:px-72 text-center s-54JR_X_9pYjX"><h1 class="text-white text-2xl mb-5 s-54JR_X_9pYjX">เรื่องบ้งในการศึกษาไทย ยังเกิดขึ้นได้ทุกวัน
+    </h1>
+    <div class="relative s-54JR_X_9pYjX">
+
+      <div class="mb-6">
+  
+  
+  <div class="relative"><div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"><svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
+    <input type="text" class="h-14 bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10" placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย"></div></div></div></div>
 </div></section>
 
 <section class="mt-8"><div class="w-full"><div class=""><ul class="flex flex-wrap -mb-px justify-center" role="tablist"><li class="mr-2" role="presentation"><button class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" id="1-tabhead" type="button" role="tab">ใหม่</button></li>
     <li class="mr-2" role="presentation"><button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="2-tabhead" type="button" role="tab">โคตรบ้ง</button></li>
     <li class="mr-2" role="presentation"><button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="3-tabhead" type="button" role="tab">บ้งตลอดกาล</button></li></ul></div></div></section>
 
-<section class="mt-8"><div class="swiper">
+<section class="mt-8"><section><div class="swiper px-16 py-10">
   <div class="swiper-wrapper">
-    <div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+    <div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">การงานอาชีพ</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">การอ่าน</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">การเขียน</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">การแสดง</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">คณิตศาสตร์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">คอมพิวเตอร์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">งานไม้</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">จิตวิทยา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ชีววิทยา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ดนตรี</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ธุรกิจศึกษา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">นาฏศิลป์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div><div class="swiper-slide cursor-pointer"><img class="h-auto max-w-full rounded-lg h-14 w-full object-cover" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="sample 1">
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
 
-      <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ประวัติศาสตร์</p></div>
-    </div>
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">พลศึกษา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ฟิสิกส์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภาษาจีน</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภาษาญี่ปุ่น</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภาษาฝรั่งเศส</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภาษาอังกฤษ</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภาษาเยอรมัน</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภาษาไทย</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ภูมิศาสตร์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">มนุษยวิทยา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ลูกเสือ</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">วรรณกรรม</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">วิทยาศาสตร์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ศาสนา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">ศิลปะ</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">สังคม</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">สังคมวิทยา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">สุขศึกษา</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">หน้าที่พลเมือง</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">เกษตร</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">เคมี</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">เทคโนโลยีสารสนเทศ</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">เนตรนารี ยุวกาชาด</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">เศรษฐศาสตร์</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">แนะแนว</p></div>
+      </div><div class="swiper-slide rounded-2xl cursor-pointer hover:scale-[1.03] ease-in-out duration-200 min-w-[150px]"><img class="h-auto max-w-full rounded-2xl h-14 w-full object-cover" src="https://via.placeholder.com/300x120/ff6711/ffffff?text=+" alt="sample 1">
+
+        <div class="absolute top-50 left-50"><p class="text-base text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal text-white">โบราณคดี</p></div>
+      </div>
     </div>
   <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   
   
-  </div></section>
+  </div></section></section>
 
 <section class="mt-8 text-center"><h4 class="text-2xl font-bold text-gray-900 dark:text-white w-full mb-2">ช่วยกันตรวจสอบความบ้ง</h4>
-	<p class="text-sm text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-center whitespace-normal mb-8">ช่วยกันตรวจสอบความบ้งของการศึกษาไทย</p>
-	<section><div class="masonry  s--4EeD7J7sqEx" style="gap: 4px; "></div></section>
+  <p class="text-sm text-gray-900/1 dark:text-white/1 leading-normal font-light tracking-normal text-center whitespace-normal mb-8">ช่วยกันตรวจสอบความบ้งของการศึกษาไทย</p>
+  <section><div class="masonry  s--4EeD7J7sqEx" style="gap: 20px; "></div></section>
 
 
-<div tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full  hidden" aria-hidden="true"><div class="relative p-4 w-full max-w-7xl h-full md:h-auto">
-		<div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg  border-gray-200 dark:border-gray-700 shadow-md relative">
-			<button type="button" class="ml-auto focus:outline-none whitespace-normal rounded-lg focus:ring-2 p-1.5 focus:ring-gray-300  hover:bg-gray-100 dark:hover:bg-gray-600 absolute top-3 right-2.5" aria-label="Close">
-		<span class="sr-only">Close modal</span>
-		<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-	</button>
-			
-			<div class="p-6 space-y-6"><div class="text-left"><span class="m-0 mx-1 rounded-full text-xs text-sm font-medium bg-pink-100 text-pink-800 dark:bg-pink-200 dark:text-pink-900 rounded px-2.5 py-0.5">บ้งประถม
-	</span>
-    <span class="m-0 mx-1 rounded-full text-xs text-sm font-medium bg-pink-100 text-pink-800 dark:bg-pink-200 dark:text-pink-900 rounded px-2.5 py-0.5">โรงพิมพ์คุรุสภา
-	</span></div>
 
-  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2"><div class="text-left"><img class="h-auto max-w-full rounded-lg mb-2" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="eiei">
-      <h4 class="text-2xl font-bold text-gray-900 dark:text-white w-full mb-2">ไหนๆ ใครว่าหนังสือเขียนผิดบ้าง ถ้าประยุทธเป็นคนกล้าหาญ รวดเร็ว ฉับพลัน
-        เราน่าจะมีนิคมบนดาวอังคารไปแล้วว่ามั้ย
-      </h4>
-      <div class="mb-2"><p class="text-sm text-gray-900/1 dark:text-white/1 leading-normal font-light tracking-normal text-left whitespace-normal mb-3">โดย <a size="xs" href="#" class="inline-flex items-center hover:underline text-blue-600 dark:text-blue-500">eiei</a></p></div>
-      <p class="text-sm text-gray-500/1 leading-normal font-light tracking-normal text-left whitespace-normal mb-3">วันที่ชาติและองค์ราชา มวลประชาอยู่มาพ้นภัย ขอดูแลคุ้มครองด้วยใจ
-        นี่คือคำสัญญา วันนี้ชาติเผชิญพาลภัย ไฟลุกโชนขึ้นมาทุกครา
-        ขอเป็นคนที่เดินเข้ามา ไม่อาจให้สายไป เพื่อนรักกลับมา ต้องใช้เวลาเท่าไร
-      </p></div>
-    <div class="p-3 pr-0 text-left"><h6 class="text-lg font-bold text-gray-900 dark:text-white w-full mb-3">ความคิดเห็นทั้งหมด</h6>
-      <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg  border border-gray-200 dark:border-gray-700 shadow-md flex max-w-screen-xl flex-col p-4 rounded-lg"><div class="flex align-center"><img class="h-auto max-w-full rounded-lg w-10 mx-2" src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg" alt="eiei">
-          <h1 class="12 text-gray-900 dark:text-white w-full">ศิวลักษณ์</h1></div>
-        <p class="text-sm text-gray-500/1 leading-normal font-light tracking-normal text-left whitespace-normal mt-3">วันที่ชาติและองค์ราชา มวลประชาอยู่มาพ้นภัย ขอดูแลคุ้มครองด้วยใจ
-          นี่คือคำสัญญา วันนี้ชาติเผชิญพาลภัย ไฟลุกโชนขึ้นมาทุกครา
-          ขอเป็นคนที่เดินเข้ามา ไม่อาจให้สายไป เพื่อนรักกลับมา ต้องใช้เวลาเท่าไร
-        </p></div></div></div></div>
-			
-			</div></div></div>
 
-	<div class="infinite-loading-container s-yINUOmzzJjCM">
+  <br>
+  <div class="infinite-loading-container s-yINUOmzzJjCM">
 
 	
 
@@ -154,7 +211,7 @@
 
     <div><div class="mb-6">
   
-  <input placeholder="ตั้งชื่อความบ้งที่คุณพบ" class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 sm:text-md p-4 h-14 bg-inherit" value=""></div>
+  <input placeholder="ตั้งชื่อความบ้งที่คุณพบ" class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 sm:text-md p-4 bg-transparent" customClass="h-14" value=""></div>
 
       <div class="mb-6">
   
@@ -168,35 +225,36 @@
           <div class="mb-6">
   
 
-  <select class="block w-full text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-sm p-2.5 mt-2 bg-inherit"><option disabled selected value="">ระดับชั้น</option></select></div></div>
+  <select class="block w-full text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-sm p-2.5 mt-2 bg-transparent"><option disabled selected value="">ระดับชั้น</option></select></div></div>
         <div class="pt-[24px]"><div class="mb-6">
   
 
-  <select class="block w-full text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-sm p-2.5 mt-2 bg-inherit"><option disabled selected value="">วิชาเรียน</option></select></div></div></div>
+  <select class="block w-full text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-sm p-2.5 mt-2 bg-transparent"><option disabled selected value="">วิชาเรียน</option></select></div></div></div>
 
       <div><div class="mb-6">
 	<label class="text-sm font-medium block text-gray-900 dark:text-gray-300 block font-medium text-base">แท็ก</label>
   <p class="text-xs text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-left whitespace-normal mb-1">ติดแท็กเพื่อให้ทุกคนช่วยกันโหวตบ้งได้ง่ายขึ้น</p>
-  <div class="relative"><div class="relative"><div class="flex absolute inset-y-0 left-0 items-center pl-3 p-2.5 text-sm pointer-events-none"><svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
-		<input placeholder="หาแท็กที่เดี่ยวข้องกับความบ้ง" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-2.5 text-sm pl-10 h-12 bg-inherit" value=""></div></div></div>
+  
+  <div class="relative"><div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"><svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
+    <input type="text" class="h-12 bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10" placeholder="หาแท็กที่เดี่ยวข้องกับความบ้ง"></div></div>
         <div class="mt-[-12px] mb-[14px]"><span class="mx-1 py-1 px-5 rounded-full text-sm bg-gray-200 text-sm font-medium rounded px-2.5 py-0.5">บ้งประถม
 	</span></div></div>
 
       <div class="mb-6">
 	<label class="text-sm font-medium block text-gray-900 dark:text-gray-300 block font-medium text-base">สำนักพิมพ์</label>
   
-  <input placeholder="ชื่อสำนักพิมพ์ที่สร้างความบ้ง" class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 p-2.5 text-sm h-12 bg-inherit" value=""></div>
+  <input placeholder="ชื่อสำนักพิมพ์ที่สร้างความบ้ง" class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 p-2.5 text-sm bg-transparent" customClass="h-12" value=""></div>
 
       <div class="mb-6">
 	<label class="text-sm font-medium block text-gray-900 dark:text-gray-300 block font-medium text-base">ผู้แจ้งบ้ง</label>
   <p class="text-xs text-gray-900/1 dark:text-white/1 leading-normal font-medium tracking-normal text-left whitespace-normal mb-1">คุณคือหนึ่งในผู้เข้าร่วมปรับการศึกษาไทย</p>
-  <input placeholder="ไม่ต้องส่ชื่อจริงมานะ" class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 p-2.5 text-sm h-12 bg-inherit" value=""></div></div></div></div>
+  <input placeholder="ไม่ต้องส่ชื่อจริงมานะ" class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 rounded-lg bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 p-2.5 text-sm bg-transparent" customClass="h-12" value=""></div></div></div></div>
 			
 			</div></div></div>
 
 
-		<script type="module" data-sveltekit-hydrate="11qlf22">
-		import { start } from "./_app/immutable/start-01df004d.js";
+		<script type="module" data-sveltekit-hydrate="195bewc">
+		import { start } from "./_app/immutable/start-a1d8e029.js";
 
 		start({
 			env: {},
@@ -210,10 +268,10 @@
 				form: null
 			},
 			paths: {"base":"","assets":""},
-			target: document.querySelector('[data-sveltekit-hydrate="11qlf22"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="195bewc"]').parentNode,
 			trailing_slash: "never"
 		});
 	</script>
-	</div>
-	</body>
+	<script type="application/json" data-sveltekit-fetched data-url="/api/metadata/subject">{"status":200,"statusText":"","headers":{},"body":"[{\"_id\":\"6325a14680c666dbe157450d\",\"name\":\"การงานอาชีพ\",\"slug\":\"การงานอาชีพ\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744ee\",\"name\":\"การอ่าน\",\"slug\":\"การอ่าน\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744ef\",\"name\":\"การเขียน\",\"slug\":\"การเขียน\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574511\",\"name\":\"การแสดง\",\"slug\":\"การแสดง\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574502\",\"name\":\"คณิตศาสตร์\",\"slug\":\"คณิตศาสตร์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe157450e\",\"name\":\"คอมพิวเตอร์\",\"slug\":\"คอมพิวเตอร์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574513\",\"name\":\"งานไม้\",\"slug\":\"งานไม้\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574512\",\"name\":\"จิตวิทยา\",\"slug\":\"จิตวิทยา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574505\",\"name\":\"ชีววิทยา\",\"slug\":\"ชีววิทยา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574510\",\"name\":\"ดนตรี\",\"slug\":\"ดนตรี\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744fc\",\"name\":\"ธุรกิจศึกษา\",\"slug\":\"ธุรกิจศึกษา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574507\",\"name\":\"นาฏศิลป์\",\"slug\":\"นาฏศิลป์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744fa\",\"name\":\"ประวัติศาสตร์\",\"slug\":\"ประวัติศาสตร์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574508\",\"name\":\"พลศึกษา\",\"slug\":\"พลศึกษา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574504\",\"name\":\"ฟิสิกส์\",\"slug\":\"ฟิสิกส์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f6\",\"name\":\"ภาษาจีน\",\"slug\":\"ภาษาจีน\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f5\",\"name\":\"ภาษาญี่ปุ่น\",\"slug\":\"ภาษาญี่ปุ่น\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f3\",\"name\":\"ภาษาฝรั่งเศส\",\"slug\":\"ภาษาฝรั่งเศส\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f2\",\"name\":\"ภาษาอังกฤษ\",\"slug\":\"ภาษาอังกฤษ\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f4\",\"name\":\"ภาษาเยอรมัน\",\"slug\":\"ภาษาเยอรมัน\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f1\",\"name\":\"ภาษาไทย\",\"slug\":\"ภาษาไทย\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744fe\",\"name\":\"ภูมิศาสตร์\",\"slug\":\"ภูมิศาสตร์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f9\",\"name\":\"มนุษยวิทยา\",\"slug\":\"มนุษยวิทยา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574509\",\"name\":\"ลูกเสือ\",\"slug\":\"ลูกเสือ\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f0\",\"name\":\"วรรณกรรม\",\"slug\":\"วรรณกรรม\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574503\",\"name\":\"วิทยาศาสตร์\",\"slug\":\"วิทยาศาสตร์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744ff\",\"name\":\"ศาสนา\",\"slug\":\"ศาสนา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe157450b\",\"name\":\"ศิลปะ\",\"slug\":\"ศิลปะ\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f7\",\"name\":\"สังคม\",\"slug\":\"สังคม\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744f8\",\"name\":\"สังคมวิทยา\",\"slug\":\"สังคมวิทยา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574501\",\"name\":\"สุขศึกษา\",\"slug\":\"สุขศึกษา\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744fd\",\"name\":\"หน้าที่พลเมือง\",\"slug\":\"หน้าที่พลเมือง\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe157450c\",\"name\":\"เกษตร\",\"slug\":\"เกษตร\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574506\",\"name\":\"เคมี\",\"slug\":\"เคมี\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe157450f\",\"name\":\"เทคโนโลยีสารสนเทศ\",\"slug\":\"เทคโนโลยีสารสนเทศ\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe157450a\",\"name\":\"เนตรนารี ยุวกาชาด\",\"slug\":\"เนตรนารี_ยุวกาชาด\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe15744fb\",\"name\":\"เศรษฐศาสตร์\",\"slug\":\"เศรษฐศาสตร์\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574514\",\"name\":\"แนะแนว\",\"slug\":\"แนะแนว\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"},{\"_id\":\"6325a14680c666dbe1574500\",\"name\":\"โบราณคดี\",\"slug\":\"โบราณคดี\",\"thumbnail\":\"https://via.placeholder.com/300x120/ff6711/ffffff?text=+\",\"createdAt\":\"2022-09-17T10:28:22.884Z\",\"updatedAt\":\"2022-09-17T10:28:22.884Z\"}]"}</script></div>
+  </body>
 </html>

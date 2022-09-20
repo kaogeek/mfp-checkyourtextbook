@@ -100,7 +100,6 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
-	export const VITE_USER_NODE_ENV: string;
 	export const NODE_ENV: string;
 	export const VITE_APP_TITLE: string;
 	export const VITE_REALM_APP_ID: string;
@@ -210,7 +209,6 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;
-		VITE_USER_NODE_ENV: string;
 		NODE_ENV: string;
 		VITE_APP_TITLE: string;
 		VITE_REALM_APP_ID: string;
