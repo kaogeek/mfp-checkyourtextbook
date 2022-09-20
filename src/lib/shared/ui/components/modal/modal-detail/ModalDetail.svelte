@@ -79,7 +79,9 @@
           <div
             class="bg-[#3794EA] text-[12px] py-1 w-full text-center rounded-b-lg"
           >
-            {NumberFormat.formatCurrency(data.upvote)}
+            {data.downvoteCount
+              ? NumberFormat.formatShort(data.downvoteCount)
+              : ''}
           </div>
         </div>
 
@@ -92,12 +94,14 @@
           <div
             class="bg-[#EA5908] text-[12px] py-1 w-full text-center rounded-b-lg"
           >
-            {NumberFormat.formatCurrency(data.downvote)}
+            {data.upvoteCount ? NumberFormat.formatShort(data.upvoteCount) : ''}
           </div>
         </div>
       </div>
 
-      <Button color="light" class="w-full border-none">ความคิดเห็นทั้งหมด (325)</Button>
+      <Button color="light" class="w-full border-none"
+        >ความคิดเห็นทั้งหมด (325)</Button
+      >
       <!-- <Heading class="mb-3" customSize="" tag="h6">ความคิดเห็นทั้งหมด</Heading>
       <Card size="xl" padding="sm" class="rounded-lg">
         <div class="flex align-center">

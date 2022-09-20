@@ -1,7 +1,5 @@
-import type { ObjectId } from 'mongodb';
-
 export interface Content {
-  _id: ObjectId;
+  _id: string;
   title: string;
   description: string;
   photo: {
@@ -10,19 +8,25 @@ export interface Content {
   };
   yearOfPublish: string;
   publisherName: string;
-  userId: ObjectId;
+  userId: string;
   hashTag: string[];
   visibility: string;
 }
 
 export interface ContentGrid {
-  _id: ObjectId;
+  _id: string;
   title: string;
   description: string;
   photo: {
     url: string;
     size: string;
   };
-  upvote: number;
-  downvote: number;
+  upvoteCount: number;
+  downvoteCount: number;
+  upvote: boolean;
+  downvote: boolean;
+}
+
+export interface GetContentId {
+  contentId: string;
 }

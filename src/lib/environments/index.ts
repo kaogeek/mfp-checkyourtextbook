@@ -11,6 +11,7 @@ class Configs {
     USER: 'users',
     SUBJECT: 'subjects',
     CONTENT: 'contents',
+    ENGAGEMENT: 'engagements'
 
   };
 }
