@@ -13,8 +13,5 @@ const handleServerError = ({ error }) => {
 const handleClientError = ({ error }) => {
   console.error(error);
 };
-export {
-  handle,
-  handleClientError,
-  handleServerError
-};
+
+export { handle, handleClientError, handleServerError };
