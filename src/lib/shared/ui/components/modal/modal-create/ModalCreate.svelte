@@ -50,7 +50,7 @@
       <Input
         placeholder="ตั้งชื่อความบ้งที่คุณพบ"
         size="lg"
-        customClass="h-14 bg-inherit"
+        customClass="h-14"
       />
 
       <Textarea placeholder="ตั้งชื่อความบ้งที่คุณพบ" rows={4} />
@@ -72,8 +72,7 @@
           label="แท็ก"
           description="ติดแท็กเพื่อให้ทุกคนช่วยกันโหวตบ้งได้ง่ายขึ้น"
           placeholder="หาแท็กที่เดี่ยวข้องกับความบ้ง"
-          size="md"
-          customClass="h-12 bg-inherit"
+          customClass="h-12"
         />
         <div class="mt-[-12px] mb-[14px]">
           <Badge
@@ -88,7 +87,7 @@
         label="สำนักพิมพ์"
         placeholder="ชื่อสำนักพิมพ์ที่สร้างความบ้ง"
         size="md"
-        customClass="h-12 bg-inherit"
+        customClass="h-12"
       />
 
       <Input
@@ -96,7 +95,7 @@
         description="คุณคือหนึ่งในผู้เข้าร่วมปรับการศึกษาไทย"
         placeholder="ไม่ต้องส่ชื่อจริงมานะ"
         size="md"
-        customClass="h-12 bg-inherit"
+        customClass="h-12"
       />
     </div>
   </div>

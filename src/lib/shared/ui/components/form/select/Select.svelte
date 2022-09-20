@@ -29,5 +29,5 @@
     >
   {/if}
 
-  <Select class="mt-2 bg-inherit" {size} {placeholder} {items} bind:value={selected} />
+  <Select class="mt-2 bg-transparent" {size} {placeholder} {items} bind:value={selected} />
 </div>

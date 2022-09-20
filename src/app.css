@@ -20,15 +20,8 @@
   --color-black: '#000';
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
 .swiper-slide {
   text-align: center;
-
-  /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -45,26 +38,25 @@
 
 .swiper-slide img {
   display: block;
-  width: 100%;
-  @apply h-20;
+  @apply h-20 w-full;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  @apply bg-white;
-  padding: 1.2rem;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  @apply bg-white p-[1.2rem] rounded-[50%] w-[32px] h-[32px] ease-in-out duration-200;
   color: var(--color-black);
-  transition: ease-in-out 200ms;
 }
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  font-size: 13px;
+  @apply text-[13px];
 }
 
-@tailwind components;
-
-@tailwind utilities;
+button[aria-label='Close'] {
+  left: 1.2rem;
+  right: auto;
+  top: 1.6rem;
+  border-radius: 25px;
+  position: absolute;
+  @apply bg-gray-100;
+}

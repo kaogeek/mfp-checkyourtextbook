@@ -2,12 +2,29 @@ import { Credentials, App } from 'realm-web';
 import { Environments } from '$environment';
 import { HttpException } from '$utils';
 
+if (
+  !Environments.REALM_APP_ID ||
+  !Environments.REALM_API_KEY ||
+  !Environments.REALM_CLUSTER_NAME ||
+  !Environments.REALM_DB_NAME
+) {
+  throw new Error('Please add your MongoRealm to .env');
+}
+
 const app = new App({ id: Environments.REALM_APP_ID });
 
-export const createConnection = async (): Promise<Realm.Services.MongoDBDatabase> => {
-	const user = await app.logIn(Credentials.apiKey(Environments.REALM_API_KEY)).catch(() => {
-		throw new HttpException('500');
-	});
+const logIn = await app
+  .logIn(Credentials.apiKey(Environments.REALM_API_KEY))
+  .catch(() => {
+    throw new HttpException('500');
+  });
 
-	return user.mongoClient(Environments.REALM_CLUSTER_NAME).db(Environments.REALM_DB_NAME);
-};
+const client: Realm.Services.MongoDB = logIn.mongoClient(
+  Environments.REALM_CLUSTER_NAME
+);
+
+const db: Realm.Services.MongoDBDatabase = client.db(
+  Environments.REALM_DB_NAME
+);
+
+export default db;

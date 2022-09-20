@@ -1,0 +1,81 @@
+{
+  ".svelte-kit/build/index.js": {
+    "file": "index.js",
+    "src": ".svelte-kit/build/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ],
+    "dynamicImports": [
+      "src/hooks.server.ts"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_Button.js",
+      "_core.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout-dfd72d46.css",
+      "_app/immutable/assets/Indicator-2b56255a.css"
+    ]
+  },
+  "src/routes/+error.svelte": {
+    "file": "entries/pages/_error.svelte.js",
+    "src": "src/routes/+error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_Button.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_error-1429862e.css",
+      "_app/immutable/assets/Indicator-2b56255a.css"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_core.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page-bfc12945.css",
+      "_app/immutable/assets/Indicator-2b56255a.css"
+    ]
+  },
+  "src/routes/+page.ts": {
+    "file": "entries/pages/_page.ts.js",
+    "src": "src/routes/+page.ts",
+    "isEntry": true
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_core.js": {
+    "file": "chunks/core.js",
+    "imports": [
+      "_index.js"
+    ],
+    "css": [
+      "_app/immutable/assets/core-e2437168.css"
+    ]
+  },
+  "_Button.js": {
+    "file": "chunks/Button.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/hooks.server.ts": {
+    "file": "chunks/hooks.server.js",
+    "src": "src/hooks.server.ts",
+    "isDynamicEntry": true
+  }
+}

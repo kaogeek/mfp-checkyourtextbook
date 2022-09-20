@@ -3,44 +3,120 @@
   import { Img, P } from 'flowbite-svelte';
   import Masonry from 'svelte-bricks';
   import { fade } from 'svelte/transition';
-  import { ModalDetail } from '../modal';
+  import { ModalDetail, ModalVote } from '../modal';
+  import type { ContentGrid } from '$models';
 
-  export let items: any[] = [];
+  import bongIcon from '$assets/vectors/bong.svg';
+  import notBongIcon from '$assets/vectors/not-bong.svg';
+  import bongIconActive from '$assets/vectors/bong-active.svg';
+  import notBongIconActive from '$assets/vectors/not-bong-active.svg';
+  import { NumberFormat } from '$utils';
+  import { onMount } from 'svelte';
+  import { contentStore } from '$core';
 
   let isOpenModal: boolean = false;
+  let isOpenModalVote: boolean = false;
+  let iconVote: string = '';
+  let dataModal: ContentGrid;
+
+  export let items: ContentGrid[] = [];
+
+  onMount(() => {
+    contentStore.subscribe((value: any) => {
+      const index = items.findIndex(({ _id }) => _id === value._id);
+      if (index > -1) items[index] = value;
+    });
+  });
+
+  async function upvote(item: ContentGrid) {
+    iconVote = 'upvote';
+    dataModal = item;
+
+    isOpenModalVote = true;
+  }
+
+  function downvote(item: ContentGrid) {
+    iconVote = 'downvote';
+    dataModal = item;
+
+    isOpenModalVote = true;
+  }
 </script>
 
 <section>
   <Masonry
-    {items}
     let:item
-    minColWidth={300}
-    maxColWidth={330}
-    gap={4}
+    {items}
+    idKey={'_id'}
+    minColWidth={280}
+    gap={20}
+    animate={true}
     duration={500}
   >
-    <section
+    <div
       in:fade
       out:fade
-      on:click={() => (isOpenModal = true)}
-      class="cursor-pointer rounded-lg p-2"
+      class="max-w-sm bg-white rounded-2xl shadow-md hover:scale-[1.02] ease-in-out duration-200"
     >
-      <LazyImage
-        src={item.img}
-        class="rounded-lg mb-2"
-        placeholder="https://via.placeholder.com/500"
-        alt={item.title}
-        options={{ threshold: 0.4 }}
-      />
-
-      <P align="left" size="xs" space="normal" weight="medium" opacity={1}
-        >{item.title}</P
+      <section
+        on:click={() => {
+          isOpenModal = true;
+          dataModal = item;
+        }}
       >
-    </section>
+        <LazyImage
+          src={item.photo.url}
+          class="rounded-t-2xl mb-2 w-full max-h-[500px]"
+          placeholder="
+  https://via.placeholder.com/{item.photo.size}/cccccc/969696?text=+"
+          alt={item.title}
+        />
+        <div class="px-3 py-1">
+          <P align="left" size="sm" space="normal" weight="normal" opacity={1}
+            >{item.title}</P
+          >
+        </div>
+      </section>
+      <div class="flex m-2 space-x-3 pb-2">
+        <div
+          on:click={() => downvote(item)}
+          class="{item.downvote
+            ? 'text-[#FF6711]'
+            : 'text-zinc-300'} text-[14px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
+        >
+          <Img
+            src={item.downvote ? bongIconActive : bongIcon}
+            class="w-[1.5rem]"
+          />&nbsp;{item.downvoteCount
+            ? NumberFormat.formatShort(item.downvoteCount)
+            : ''}
+        </div>
+
+        <div
+          on:click={() => upvote(item)}
+          class="{item.upvote
+            ? 'text-[#44A5FF]'
+            : 'text-zinc-300'} text-[14px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
+        >
+          <Img
+            src={item.upvote ? notBongIconActive : notBongIcon}
+            class="w-[1.5rem]"
+          />&nbsp;{item.upvoteCount
+            ? NumberFormat.formatShort(item.upvoteCount)
+            : ''}
+        </div>
+      </div>
+    </div>
   </Masonry>
 </section>
 
-<ModalDetail bind:isOpenModal />
+{#if isOpenModal}
+  <ModalDetail bind:isOpenModal bind:data={dataModal} />
+{/if}
+
+{#if isOpenModalVote}
+  <ModalVote bind:isOpenModalVote bind:iconVote bind:data={dataModal} />
+{/if}
 
 <style>
 </style>

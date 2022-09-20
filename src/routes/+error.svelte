@@ -10,7 +10,7 @@
 
 <section>
   <h1>{$page.status}</h1>
-  <p>{$page.error.message}</p>
+  <p>{$page?.error?.message}</p>
 
   <Button color="light" href="/">กลับสู่หน้าหลัก</Button>
 </section>
@@ -21,10 +21,10 @@
   }
 
   h1 {
-    @apply text-9xl text-neutral-600 mb-5;
+    @apply text-9xl mb-5;
   }
 
   p {
-    @apply text-neutral-600 mb-5;
+    @apply mb-5;
   }
 </style>
