@@ -7,6 +7,7 @@
   export let customClass: string = '';
   export let size: 'lg' | 'sm' | 'md' | undefined;
   export let inputValue: string;
+  export let disabled: boolean = false;
 </script>
 
 <div class="mb-6">
@@ -28,6 +29,7 @@
     {placeholder}
     class="bg-transparent"
     {customClass}
+    {disabled}
     bind:value={inputValue}
   />
 </div>

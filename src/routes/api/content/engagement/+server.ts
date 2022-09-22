@@ -1,7 +1,6 @@
 import getCollection from '$core/functions/collection';
 import { json } from '@sveltejs/kit';
 import { ObjectId } from 'mongodb';
-import { v4 as uuidv4 } from 'uuid';
 
 export async function POST({ request }: { request: Request }) {
   const body = await request.json();
@@ -18,7 +17,7 @@ export async function POST({ request }: { request: Request }) {
     const insert = await userCollection.insertOne({
       aliasName: body.name,
       clientType: 'general',
-      clientUUID: uuidv4(),
+      clientUUID: crypto.randomUUID(),
       createdAt: new Date(),
       updatedAt: new Date(),
     });
