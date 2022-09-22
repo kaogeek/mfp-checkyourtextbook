@@ -1,17 +1,106 @@
 <script lang="ts">
-  import { Badge, Label, Modal } from 'flowbite-svelte';
+  import { Badge, Button, Label, Modal } from 'flowbite-svelte';
   import { Input, Textarea, InputIcon, Select } from '$ui/components';
+  import { onMount } from 'svelte';
+  import apiCall, { Endpoints } from '$core/functions/call';
+  import type { Subject } from '$models';
 
   export let isOpenModalCreate: boolean;
+  let createPost = {
+    title: '',
+    photo: {
+      base64: 'mock',
+      size: '564x493',
+    },
+    description: '',
+    primaryClass: '',
+    subject: '',
+    hashtag: [],
+    publisherName: '',
+    name: '',
+  };
+
+  let selectTag = '';
+
+  let disabled: boolean = false;
+
+  let subjects: any[] = [];
+  let classes: any[] = [];
+  let hashtags: any[] = [];
+
+  onMount(async () => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      const user = await apiCall(fetch, Endpoints.getUserById, {
+        method: 'GET',
+        pathParams: [`?userId=${userId}`],
+      });
+
+      if (user) disabled = true;
+      createPost.name = user?.aliasName ?? '';
+    }
+
+    const [subjectsResp, secondaryClass, hashtagResp]: [
+      Subject[],
+      any[],
+      any[]
+    ] = await Promise.all([
+      apiCall(fetch, Endpoints.getSubject, {
+        method: 'GET',
+      }),
+      apiCall(fetch, Endpoints.getSecondaryClass, {
+        method: 'GET',
+      }),
+      apiCall(fetch, Endpoints.getRecomTag, {
+        method: 'GET',
+      }),
+    ]);
+
+    subjects = subjectsResp.map((subject) => {
+      return {
+        name: subject.name,
+        value: subject.slug,
+      };
+    });
+
+    classes = secondaryClass.map((subject) => {
+      return {
+        name: subject.name,
+        value: subject.name,
+      };
+    });
+
+    hashtags = hashtagResp.map((hashtag) => {
+      return {
+        name: hashtag.name,
+        value: hashtag.slug,
+      };
+    });
+  });
+
+  async function create() {
+    if (Object.values(createPost).every((e) => e)) {
+      // isOpenModalCreate = false;
+      createPost.hashtag = [selectTag] as any;
+      await apiCall(fetch, Endpoints.createContent, {
+        method: 'POST',
+        body: JSON.stringify(createPost),
+      });
+    }
+  }
 </script>
 
 <Modal
   size="lg"
-  autoclose={true}
+  autoclose={false}
   bind:open={isOpenModalCreate}
   on:hide={() => (isOpenModalCreate = false)}
 >
+  <div class="text-right">
+    <Button on:click={() => create()}>สร้าง</Button>
+  </div>
   <br />
+
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
     <div>
       <div class="flex justify-center items-center w-full h-4/6 min-h-[300px]">
@@ -50,20 +139,35 @@
       <Input
         placeholder="ตั้งชื่อความบ้งที่คุณพบ"
         size="lg"
-        customClass="h-14"
+        customClass="h-12"
+        bind:inputValue={createPost.title}
       />
 
-      <Textarea placeholder="ตั้งชื่อความบ้งที่คุณพบ" rows={4} />
+      <Textarea
+        placeholder="ตั้งชื่อความบ้งที่คุณพบ"
+        rows={4}
+        bind:inputValue={createPost.description}
+      />
 
       <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <div>
           <Label for="large-input" class="block font-medium text-base"
             >ที่มาความบ้ง</Label
           >
-          <Select placeholder="ระดับชั้น" size="md" />
+          <Select
+            placeholder="ระดับชั้น"
+            size="md"
+            items={classes}
+            bind:inputValue={createPost.primaryClass}
+          />
         </div>
         <div class="pt-[24px]">
-          <Select placeholder="วิชาเรียน" size="md" />
+          <Select
+            placeholder="วิชาเรียน"
+            size="md"
+            items={subjects}
+            bind:inputValue={createPost.subject}
+          />
         </div>
       </div>
 
@@ -71,15 +175,19 @@
         <InputIcon
           label="แท็ก"
           description="ติดแท็กเพื่อให้ทุกคนช่วยกันโหวตบ้งได้ง่ายขึ้น"
-          placeholder="หาแท็กที่เดี่ยวข้องกับความบ้ง"
+          placeholder="หาแท็กที่เกี่ยวข้องกับความบ้ง"
           customClass="h-12"
+          bind:inputValue={selectTag}
         />
         <div class="mt-[-12px] mb-[14px]">
-          <Badge
-            baseClass="mx-1 py-1 px-5 rounded-full text-sm bg-gray-200"
-            color="gray"
-            large={true}>บ้งประถม</Badge
-          >
+          {#each hashtags as hashtag}
+            <span
+              id="badge-dismiss-default"
+              class="inline-flex items-center py-1 px-3 mr-1 mt-1 text-sm font-medium text-gray-700 bg-gray-200 rounded-2xl"
+            >
+              {hashtag.name}
+            </span>
+          {/each}
         </div>
       </div>
 
@@ -88,6 +196,7 @@
         placeholder="ชื่อสำนักพิมพ์ที่สร้างความบ้ง"
         size="md"
         customClass="h-12"
+        bind:inputValue={createPost.publisherName}
       />
 
       <Input
@@ -96,6 +205,8 @@
         placeholder="ไม่ต้องส่ชื่อจริงมานะ"
         size="md"
         customClass="h-12"
+        bind:disabled
+        bind:inputValue={createPost.name}
       />
     </div>
   </div>

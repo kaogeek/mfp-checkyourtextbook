@@ -5,13 +5,9 @@
   export let description: string = '';
   export let placeholder: string = '';
   export let size: 'lg' | 'sm' | 'md' | undefined;
+  export let inputValue: string;
 
-  let selected: string;
-
-  let items: {
-    value: string;
-    name: string;
-  }[];
+  export let items: any[] = [];
 </script>
 
 <div class="mb-6">
@@ -29,5 +25,11 @@
     >
   {/if}
 
-  <Select class="mt-2 bg-transparent" {size} {placeholder} {items} bind:value={selected} />
+  <Select
+    class="mt-2 bg-transparent"
+    {size}
+    {placeholder}
+    {items}
+    bind:value={inputValue}
+  />
 </div>

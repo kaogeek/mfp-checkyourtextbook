@@ -17,7 +17,7 @@
 
   export let isOpenModal: boolean = false;
   export let data: ContentGrid;
-  let hashTags = data.hashTag;
+  let hashtags = data.hashTag;
 </script>
 
 <Modal
@@ -27,12 +27,12 @@
   on:hide={() => (isOpenModal = false)}
 >
   <div class="text-left ml-10 mt-[0.35rem]">
-    {#each hashTags as hashTag}
+    {#each hashtags ?? [] as hashtag}
       <span
         id="badge-dismiss-default"
         class="inline-flex items-center py-1 px-3 mr-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-2xl"
       >
-        {hashTag}
+        {hashtag}
       </span>
     {/each}
   </div>
