@@ -11,7 +11,10 @@
     <slot />
   </section>
 </main>
-<ModalCreate bind:isOpenModalCreate />
+
+{#if isOpenModalCreate}
+  <ModalCreate bind:isOpenModalCreate />
+{/if}
 
 <style>
   section {

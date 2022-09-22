@@ -9,7 +9,6 @@
   import type { ContentGrid } from '$models';
 
   import { contentStore } from '$core';
-  import { fade } from 'svelte/transition';
 
   export let isOpenModalVote: boolean;
   export let iconVote: string;
@@ -33,7 +32,7 @@
       });
 
       if (user) disabled = true;
-      voteData.name = user.aliasName ?? '';
+      voteData.name = user?.aliasName ?? '';
     }
 
     voteData.contentId = data._id;

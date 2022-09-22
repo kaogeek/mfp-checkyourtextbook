@@ -28,9 +28,10 @@ export async function GET({ url }: { url: URL }) {
     ];
   }
 
-  if (page) {
+  if (Number(page) > 1) {
     skip = Number(page) * 10;
   }
+
   const { contents: contentCollection } = await getCollection();
 
   const contents = await contentCollection.aggregate([
@@ -51,7 +52,7 @@ export async function GET({ url }: { url: URL }) {
         title: 1,
         description: 1,
         photo: 1,
-        hashTag: 1
+        hashTag: 1,
       },
     },
     {
