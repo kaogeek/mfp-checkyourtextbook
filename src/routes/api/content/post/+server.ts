@@ -8,7 +8,25 @@ export async function GET({ url }: { url: URL }) {
 
   const page = url.searchParams.get('page');
   const userId = url.searchParams.get('userId');
+  const search = url.searchParams.get('search');
 
+  const query: any = { visibility: 'publish' };
+
+  if (search) {
+    const pattern = new RegExp(search, 'i');
+    query.$or = [
+      { title: pattern },
+      { description: pattern },
+      { yearOfPublish: search },
+      { publisherName: pattern },
+      {
+        $or: [
+          { hashTag: pattern },
+          { hashTag: new RegExp(search.replace(/[_]/g, ' '), 'i') },
+        ],
+      },
+    ];
+  }
 
   if (page) {
     skip = Number(page) * 10;
@@ -17,9 +35,7 @@ export async function GET({ url }: { url: URL }) {
 
   const contents = await contentCollection.aggregate([
     {
-      $match: {
-        visibility: 'publish',
-      },
+      $match: query,
     },
     {
       $sort: { _id: -1 },
@@ -35,6 +51,7 @@ export async function GET({ url }: { url: URL }) {
         title: 1,
         description: 1,
         photo: 1,
+        hashTag: 1
       },
     },
     {
@@ -130,6 +147,7 @@ export async function GET({ url }: { url: URL }) {
         title: 1,
         description: 1,
         photo: 1,
+        hashTag: 1,
         upvoteCount: { $ifNull: ['$engagementsCount.upvote', 0] },
         downvoteCount: { $ifNull: ['$engagementsCount.downvote', 0] },
         upvote: { $cond: [{ $ifNull: ['$upvote', false] }, true, false] },

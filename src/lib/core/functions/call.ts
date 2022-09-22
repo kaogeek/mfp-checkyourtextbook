@@ -4,6 +4,7 @@ export enum Endpoints {
   getUserById = '/api/user/get-user-id',
   getSubject = '/api/metadata/subject',
   getContent = '/api/content/post',
+  createContent = '/api/content/create-post',
   postEngagement = '/api/content/engagement',
 }
 

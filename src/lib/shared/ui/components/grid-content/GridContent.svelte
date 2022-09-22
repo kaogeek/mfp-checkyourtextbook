@@ -43,7 +43,7 @@
   }
 </script>
 
-<section>
+<section class="mb-2">
   <Masonry
     let:item
     {items}

@@ -28,19 +28,19 @@
       id={1}
       tabStyle="underline"
       activeTabValue={activeTabValue3}
-      on:click={handleClick3(1)}>ใหม่</TabHeadItem
+      on:click={handleClick3(1)}>บ้งล่าสุด</TabHeadItem
     >
     <TabHeadItem
       id={2}
       tabStyle="underline"
       activeTabValue={activeTabValue3}
-      on:click={handleClick3(2)}>โคตรบ้ง</TabHeadItem
+      on:click={handleClick3(2)}>บ้งมาแรง</TabHeadItem
     >
     <TabHeadItem
       id={3}
       tabStyle="underline"
       activeTabValue={activeTabValue3}
-      on:click={handleClick3(3)}>บ้งตลอดกาล</TabHeadItem
+      on:click={handleClick3(3)}>บ้งมากสุด</TabHeadItem
     >
   </TabHead>
 </TabWrapper>

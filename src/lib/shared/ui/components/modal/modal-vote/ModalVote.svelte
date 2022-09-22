@@ -3,6 +3,7 @@
   import { Input, Textarea } from '$ui/components';
   import bongIconActive from '$assets/vectors/bong-active.svg';
   import notBongIconActive from '$assets/vectors/not-bong-active.svg';
+  import sendIcon from '$assets/vectors/send.svg';
   import apiCall, { Endpoints } from '$core/functions/call';
   import { onMount } from 'svelte';
   import type { ContentGrid } from '$models';
@@ -19,17 +20,20 @@
     name: '',
     contentId: '',
   };
+  let disabled: boolean;
 
   voteData.status = iconVote;
 
   onMount(async () => {
-    if (localStorage.getItem('name') && localStorage.getItem('userId')) {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
       const user = await apiCall(fetch, Endpoints.getUserById, {
         method: 'GET',
-        pathParams: [`?name=${localStorage.getItem('name')}`],
+        pathParams: [`?userId=${userId}`],
       });
 
-      voteData.name = localStorage.getItem('name') ?? '';
+      if (user) disabled = true;
+      voteData.name = user.aliasName ?? '';
     }
 
     voteData.contentId = data._id;
@@ -54,45 +58,44 @@
   }
 </script>
 
-<div in:fade={{ duration: 200 }}>
-  <Modal
-    size="sm"
-    autoclose={false}
-    bind:open={isOpenModalVote}
-    on:hide={() => (isOpenModalVote = false)}
-  >
-    <div class="text-right">
-      <Button
-        on:click={() => {
-          vote();
-        }}
-      >
-        สร้าง</Button
-      >
-    </div>
-    <br />
-    <div class="flex justify-center">
-      <Img
-        src={iconVote === 'upvote' ? notBongIconActive : bongIconActive}
-        class="w-[14rem]"
-      />
-    </div>
-    <br />
+<Modal
+  size="sm"
+  autoclose={false}
+  bind:open={isOpenModalVote}
+  on:hide={() => (isOpenModalVote = false)}
+>
+  <div class="text-right">
+    <Button
+      on:click={() => {
+        vote();
+      }}
+    >
+      <Img src={sendIcon} class="w-[15px]" alt="send" /></Button
+    >
+  </div>
+  <br />
+  <div class="flex justify-center">
+    <Img
+      src={iconVote === 'upvote' ? notBongIconActive : bongIconActive}
+      class="w-[14rem]"
+    />
+  </div>
+  <br />
 
-    <div class="text-left">
-      <Textarea
-        placeholder="ทำไมถึงคิดว่าไม่บ้ง"
-        rows={4}
-        bind:inputValue={voteData.reason}
-      />
-      <Input
-        label="ผู้แจ้งบ้ง"
-        description="คุณคือหนึ่งในผู้ร่วมระดับการศึกษาไทย"
-        placeholder="ไม่ต้องใส่ชื่อจริงมานะ"
-        size="md"
-        customClass="h-12"
-        bind:inputValue={voteData.name}
-      />
-    </div>
-  </Modal>
-</div>
+  <div class="text-left">
+    <Textarea
+      placeholder="ทำไมถึงคิดว่าไม่บ้ง"
+      rows={4}
+      bind:inputValue={voteData.reason}
+    />
+    <Input
+      label="ผู้แจ้งบ้ง"
+      description="คุณคือหนึ่งในผู้ร่วมระดับการศึกษาไทย"
+      placeholder="ไม่ต้องใส่ชื่อจริงมานะ"
+      size="md"
+      customClass="h-12"
+      bind:disabled
+      bind:inputValue={voteData.name}
+    />
+  </div>
+</Modal>
