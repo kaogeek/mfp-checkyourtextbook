@@ -1,10 +1,14 @@
 import { HttpException } from '$utils';
 
 export enum Endpoints {
-  getUserById = '/api/user/get-user-id',
+  createContent = '/api/content/create-post',
+  getRecomTag = '/api/content/get-recom-tag',
+  getContent = '/api/content/get-post',
+  getPrimaryClass = '/api/metadata/primary-class',
+  getSecondaryClass = '/api/metadata/secondary-class',
   getSubject = '/api/metadata/subject',
-  getContent = '/api/content/post',
-  postEngagement = '/api/content/engagement',
+  getUserById = '/api/user/get-user-id',
+  postEngagement = '/api/content/create-engagement',
 }
 
 type Props = {

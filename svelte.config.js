@@ -13,10 +13,7 @@ const config = {
   ],
 
   kit: {
-    adapter: adapter({
-      edge: false,
-      split: false,
-    }),
+    adapter: adapter(),
     alias: {
       $components: resolve('./src/lib/shared/components'),
       $core: resolve('./src/lib/core'),

@@ -10,7 +10,7 @@
 
 <section in:fade>
   <Swiper
-    class="px-16 py-10"
+    class="px-16 py-5"
     loop={true}
     slidesPerView={6}
     spaceBetween={15}

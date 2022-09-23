@@ -17,6 +17,7 @@
 
   export let isOpenModal: boolean = false;
   export let data: ContentGrid;
+  let hashtags = data.hashTag;
 </script>
 
 <Modal
@@ -25,13 +26,15 @@
   bind:open={isOpenModal}
   on:hide={() => (isOpenModal = false)}
 >
-  <div class="text-left">
-    <Badge baseClass="m-0 mx-1 rounded-full text-xs" large={true} color="pink"
-      >บ้งประถม</Badge
-    >
-    <Badge baseClass="m-0 mx-1 rounded-full text-xs" large={true} color="pink"
-      >โรงพิมพ์คุรุสภา</Badge
-    >
+  <div class="text-left ml-10 mt-[0.35rem]">
+    {#each hashtags ?? [] as hashtag}
+      <span
+        id="badge-dismiss-default"
+        class="inline-flex items-center py-1 px-3 mr-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-2xl"
+      >
+        {hashtag}
+      </span>
+    {/each}
   </div>
 
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">

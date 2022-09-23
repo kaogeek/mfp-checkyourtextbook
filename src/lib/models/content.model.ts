@@ -21,6 +21,7 @@ export interface ContentGrid {
     url: string;
     size: string;
   };
+  hashTag: string[];
   upvoteCount: number;
   downvoteCount: number;
   upvote: boolean;
