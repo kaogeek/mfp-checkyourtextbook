@@ -12,6 +12,7 @@ class Configs {
     SUBJECT: 'subjects',
     CONTENT: 'contents',
     ENGAGEMENT: 'engagements',
+    ENGAGEMENT_COUNT: 'engagementCount',
     CLASS: 'classes',
     HASHTAG: 'hashtags',
   };

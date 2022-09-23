@@ -1,24 +1,15 @@
 <script lang="ts">
-  import {
-    TabContentItem,
-    TabHead,
-    TabHeadItem,
-    TabWrapper,
-  } from 'flowbite-svelte';
-  import { GridContent } from '../grid-content';
-  let activeTabValue3 = 1;
+  import { searchCategory } from '$core';
+  import { TabHead, TabHeadItem, TabWrapper } from 'flowbite-svelte';
+  let activeTabValue = 1;
 
-  const handleClick3 = (tabValue: number) => () => {
-    activeTabValue3 = tabValue;
+  const handleTab = (tabValue: number, input: string) => () => {
+    if (activeTabValue !== tabValue) searchCategory.set(input);
+    activeTabValue = tabValue;
   };
 </script>
 
-<TabWrapper
-  tabStyle="custom"
-  bind:activeTabValue={activeTabValue3}
-  let:tabStyle
-  let:tabId
->
+<TabWrapper tabStyle="custom" bind:activeTabValue let:tabStyle let:tabId>
   <TabHead
     customUlClass="flex flex-wrap -mb-px justify-center"
     {tabStyle}
@@ -27,20 +18,20 @@
     <TabHeadItem
       id={1}
       tabStyle="underline"
-      activeTabValue={activeTabValue3}
-      on:click={handleClick3(1)}>บ้งล่าสุด</TabHeadItem
+      {activeTabValue}
+      on:click={handleTab(1, 'latest')}>บ้งล่าสุด</TabHeadItem
     >
     <TabHeadItem
       id={2}
       tabStyle="underline"
-      activeTabValue={activeTabValue3}
-      on:click={handleClick3(2)}>บ้งมาแรง</TabHeadItem
+      {activeTabValue}
+      on:click={handleTab(2, 'hot')}>บ้งมาแรง</TabHeadItem
     >
     <TabHeadItem
       id={3}
       tabStyle="underline"
-      activeTabValue={activeTabValue3}
-      on:click={handleClick3(3)}>บ้งมากสุด</TabHeadItem
+      {activeTabValue}
+      on:click={handleTab(3, 'most')}>บ้งมากสุด</TabHeadItem
     >
   </TabHead>
 </TabWrapper>

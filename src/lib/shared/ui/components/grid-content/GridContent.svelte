@@ -11,8 +11,6 @@
   import bongIconActive from '$assets/vectors/bong-active.svg';
   import notBongIconActive from '$assets/vectors/not-bong-active.svg';
   import { NumberFormat } from '$utils';
-  import { onMount } from 'svelte';
-  import { contentStore } from '$core';
 
   let isOpenModal: boolean = false;
   let isOpenModalVote: boolean = false;
@@ -20,13 +18,6 @@
   let dataModal: ContentGrid;
 
   export let items: ContentGrid[] = [];
-
-  onMount(() => {
-    contentStore.subscribe((value: any) => {
-      const index = items.findIndex(({ _id }) => _id === value._id);
-      if (index > -1) items[index] = value;
-    });
-  });
 
   async function upvote(item: ContentGrid) {
     iconVote = 'upvote';
@@ -49,6 +40,7 @@
     {items}
     idKey={'_id'}
     minColWidth={280}
+    maxColWidth={items.length > 3 ? undefined : 280}
     gap={20}
     animate={true}
     duration={500}
