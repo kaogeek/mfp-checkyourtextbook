@@ -9,7 +9,7 @@ export interface Content {
   yearOfPublish: string;
   publisherName: string;
   userId: string;
-  hashTag: string[];
+  hashtag: string[];
   visibility: string;
 }
 
@@ -21,7 +21,7 @@ export interface ContentGrid {
     url: string;
     size: string;
   };
-  hashTag: string[];
+  hashtag: string[];
   upvoteCount: number;
   downvoteCount: number;
   upvote: boolean;

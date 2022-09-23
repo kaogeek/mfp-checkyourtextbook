@@ -11,12 +11,23 @@
   import { Environments } from '$environment';
   import type { ContentGrid, Subject } from '$models';
   import apiCall, { Endpoints } from '$core/functions/call';
-  import { searchStore } from '$core';
+  import {
+    contentStore,
+    searchCategory,
+    searchClassStore,
+    searchStore,
+    searchSubjectStore,
+  } from '$core';
   import { onMount } from 'svelte';
 
   let page = 1;
-  let items: ContentGrid[] = [];
-  let searchText: string;
+  let contents: ContentGrid[] = [];
+  let search = {
+    searchText: '',
+    searchClass: '',
+    searchSubject: '',
+    searchCategory: '',
+  };
   let initialSearch: boolean = false;
   let infiniteEventCustom: InfiniteEvent;
 
@@ -24,24 +35,51 @@
     subjects: Subject[];
   };
 
+  async function loadNew() {
+    if (initialSearch) {
+      page = 1;
+      infiniteEventCustom.detail.reset();
+
+      const contentsReps = await loadData();
+      contents = contentsReps;
+
+      if (!contents.length) {
+        infiniteEventCustom.detail.complete();
+      }
+
+      infiniteEventCustom.detail.loaded();
+
+      page += 1;
+    }
+  }
+
   onMount(() => {
+    searchClassStore.subscribe(async (value) => {
+      search.searchClass = value;
+      await loadNew();
+    });
+
+    searchSubjectStore.subscribe(async (value) => {
+      search.searchSubject = value;
+      await loadNew();
+    });
+
+    searchCategory.subscribe(async (value) => {
+      search.searchCategory = value;
+      await loadNew();
+    });
+
     searchStore.subscribe(async (value) => {
-      searchText = value;
+      search.searchText = value;
+      await loadNew();
+    });
 
-      if (initialSearch) {
-        page = 1;
-        infiniteEventCustom.detail.reset();
-
-        const contents = await loadData();
-        items = contents;
-
-        if (!contents.length) {
-          infiniteEventCustom.detail.complete();
-        }
-
-        infiniteEventCustom.detail.loaded();
-
-        page += 1;
+    contentStore.subscribe(async (value: any) => {
+      const index = contents.findIndex(({ _id }) => _id === value._id);
+      if (index > -1) {
+        contents[index] = value;
+      } else {
+        if (Object.values(value).length) await loadNew();
       }
     });
   });
@@ -51,8 +89,16 @@
     return apiCall(fetch, Endpoints.getContent, {
       method: 'GET',
       pathParams: [
-        `?page=${page}${searchText ? `&search=${searchText}` : ''}${
-          userId ? `&userId=${userId}` : ''
+        `?page=${page}${
+          search.searchText ? `&searchText=${search.searchText}` : ''
+        }${userId ? `&userId=${userId}` : ''}${
+          search.searchClass ? `&searchClass=${search.searchClass}` : ''
+        }${
+          search.searchSubject ? `&searchSubject=${search.searchSubject}` : ''
+        }${
+          search.searchCategory
+            ? `&searchCategory=${search.searchCategory}`
+            : ''
         }`,
       ],
     });
@@ -60,15 +106,25 @@
 
   async function infiniteHandler(infiniteEvent: InfiniteEvent) {
     infiniteEventCustom = infiniteEvent;
-    const contents = await loadData();
+    const contentsReps = await loadData();
 
     page += 1;
 
-    if (!contents.length) {
+    if (!contentsReps.length) {
       infiniteEvent.detail.complete();
     }
 
-    items = [...items, ...contents];
+    contents = [
+      ...contents,
+      ...contentsReps.filter((content) => {
+        const findContent = contents.find(
+          (newContent) => newContent._id === content._id
+        );
+        if (findContent) return false;
+        return true;
+      }),
+    ];
+
     infiniteEvent.detail.loaded();
 
     if (!initialSearch) initialSearch = true;
@@ -101,7 +157,7 @@
     weight="light"
     opacity={1}>บ้ง ไม่บ้งยังไง มาช่วยกันบอก</P
   >
-  <GridContent bind:items />
+  <GridContent bind:items={contents} />
   <InfiniteLoading on:infinite={infiniteHandler} distance={200} />
 </section>
 

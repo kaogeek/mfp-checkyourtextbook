@@ -17,7 +17,7 @@
 
   export let isOpenModal: boolean = false;
   export let data: ContentGrid;
-  let hashtags = data.hashTag;
+  let hashtags = data.hashtag;
 </script>
 
 <Modal

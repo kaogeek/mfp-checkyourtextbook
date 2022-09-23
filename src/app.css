@@ -60,3 +60,8 @@ button[aria-label='Close'] {
   position: absolute;
   @apply bg-gray-100;
 }
+
+div.masonry {
+  justify-content: left;
+  width: auto;
+}
