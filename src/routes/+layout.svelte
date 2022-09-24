@@ -1,23 +1,26 @@
 <script lang="ts">
   import { Header, ModalCreate } from '$ui/components';
-  import '../app.css';
 
   let isOpenModalCreate: boolean = false;
+  let scrollY: number = 0;
 </script>
 
-<Header bind:isOpenModalCreate />
-<main class="pt-[60px]">
-  <section class="p-4">
-    <slot />
-  </section>
+<Header bind:isOpenModalCreate bind:scrollY />
+
+<main>
+  <slot />
 </main>
 
 {#if isOpenModalCreate}
   <ModalCreate bind:isOpenModalCreate />
 {/if}
 
+<svelte:window bind:scrollY />
+
 <style>
-  section {
+  @import url('../app.css');
+
+  main {
     min-height: calc(100vh - 60px - 68px);
   }
 </style>

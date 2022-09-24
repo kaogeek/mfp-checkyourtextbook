@@ -474,7 +474,6 @@ const ModalCreate = create_ssr_component(($$result, $$props, $$bindings, slots) 
 			{
 				size: "lg",
 				autoclose: false,
-				open: isOpenModalCreate
 			},
 			{
 				open: $$value => {
@@ -981,6 +980,7 @@ ${isOpenModalCreate
 				{}
 			)}`
 		: ``}`;
+
 	} while (!$$settled);
 
 	return $$rendered;

@@ -356,5 +356,4 @@ function style_object_to_string(style_object) {
         .map(key => `${key}: ${style_object[key]};`)
         .join(' ');
 }
-
 export { safe_not_equal as a, add_attribute as b, create_ssr_component as c, compute_rest_props as d, escape as e, spread as f, getContext as g, escape_object as h, escape_attribute_value as i, is_void as j, each as k, compute_slots as l, missing_component as m, noop as n, createEventDispatcher as o, subscribe as p, onDestroy as q, setContext as s, tick as t, validate_component as v };
