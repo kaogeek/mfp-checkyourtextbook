@@ -4,6 +4,7 @@
   import { onMount } from 'svelte';
   import apiCall, { Endpoints } from '$core/functions/call';
   import type { Subject } from '$models';
+  import { contentStore } from '$core';
 
   export let isOpenModalCreate: boolean;
   let createPost = {
@@ -13,7 +14,7 @@
       size: '564x493',
     },
     description: '',
-    primaryClass: '',
+    class: '',
     subject: '',
     hashtag: [],
     publisherName: '',
@@ -28,6 +29,41 @@
   let classes: any[] = [];
   let hashtags: any[] = [];
 
+  const dropHandler = async (event: DragEvent) => {
+    event.preventDefault();
+
+    const files = event.dataTransfer?.items
+      ? Array.from(event.dataTransfer.items).map((item) => item.getAsFile())
+      : event.dataTransfer?.files;
+
+    if (!files) return;
+
+    uploadFile(files);
+  };
+
+  const changeHandler = async (event: Event) => {
+    const files = (event.target as HTMLInputElement).files;
+
+    if (!files) return;
+
+    uploadFile(files);
+
+    (event.target as HTMLInputElement).value = '';
+  };
+
+  const uploadFile = async (files: any) => {
+    // const image = await imagekit.upload({
+    //   file: files[0],
+    //   fileName: files[0].name,
+    // });
+
+    // console.log(image);
+
+    fetch('https://upload.imagekit.io/api/v1/files/upload', {
+      method: 'POST',
+    });
+  };
+
   onMount(async () => {
     const userId = localStorage.getItem('userId');
     if (userId) {
@@ -40,21 +76,18 @@
       createPost.name = user?.aliasName ?? '';
     }
 
-    const [subjectsResp, secondaryClass, hashtagResp]: [
-      Subject[],
-      any[],
-      any[]
-    ] = await Promise.all([
-      apiCall(fetch, Endpoints.getSubject, {
-        method: 'GET',
-      }),
-      apiCall(fetch, Endpoints.getSecondaryClass, {
-        method: 'GET',
-      }),
-      apiCall(fetch, Endpoints.getRecomTag, {
-        method: 'GET',
-      }),
-    ]);
+    const [subjectsResp, classResp, hashtagResp]: [Subject[], any[], any[]] =
+      await Promise.all([
+        apiCall(fetch, Endpoints.getSubject, {
+          method: 'GET',
+        }),
+        apiCall(fetch, Endpoints.getPrimaryClass, {
+          method: 'GET',
+        }),
+        apiCall(fetch, Endpoints.getRecomTag, {
+          method: 'GET',
+        }),
+      ]);
 
     subjects = subjectsResp.map((subject) => {
       return {
@@ -63,10 +96,10 @@
       };
     });
 
-    classes = secondaryClass.map((subject) => {
+    classes = classResp.map((c: any) => {
       return {
-        name: subject.name,
-        value: subject.name,
+        name: c.name,
+        value: c.name,
       };
     });
 
@@ -80,18 +113,41 @@
 
   async function create() {
     if (Object.values(createPost).every((e) => e)) {
-      // isOpenModalCreate = false;
       createPost.hashtag = [selectTag] as any;
-      await apiCall(fetch, Endpoints.createContent, {
+
+      const { content, user } = await apiCall(fetch, Endpoints.createContent, {
         method: 'POST',
-        body: JSON.stringify(createPost),
+        body: JSON.stringify({
+          title: createPost.title,
+          photo: {
+            base64: 'mock',
+            size: '564x493',
+          },
+          description: createPost.description,
+          hashtag: [
+            ...createPost.hashtag,
+            createPost.class,
+            createPost.subject,
+          ],
+          publisherName: createPost.publisherName,
+          name: createPost.name,
+        }),
       });
+
+      if (user) {
+        localStorage.setItem('userId', user._id);
+        localStorage.setItem('name', user.aliasName);
+      }
+
+      contentStore.set(content);
+      isOpenModalCreate = false;
     }
   }
 </script>
 
 <Modal
   size="lg"
+  placement="top-center"
   autoclose={false}
   bind:open={isOpenModalCreate}
   on:hide={() => (isOpenModalCreate = false)}
@@ -99,11 +155,16 @@
   <div class="text-right">
     <Button on:click={() => create()}>สร้าง</Button>
   </div>
-  <br />
 
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
     <div>
-      <div class="flex justify-center items-center w-full h-4/6 min-h-[300px]">
+      <div
+        class="flex justify-center items-center w-full h-4/6 min-h-[300px]"
+        on:drop={dropHandler}
+        on:dragover={(event) => {
+          event.preventDefault();
+        }}
+      >
         <label
           for="dropzone-file"
           class=" flex flex-col justify-center items-center w-full h-full bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100"
@@ -111,7 +172,7 @@
           <div class="flex flex-col justify-center items-center pt-5 pb-6">
             <svg
               aria-hidden="true"
-              class="mb-3 w-10 h-10 text-gray-400"
+              class="mb-3 w-10 h-10 text-zinc-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -123,14 +184,20 @@
                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
               /></svg
             >
-            <p class="mb-2 text-sm text-gray-500">
+            <p class="mb-2 text-sm text-zinc-500">
               <span class="font-semibold">โยนรูปบ้งๆ เข้ามาในนี้</span>
             </p>
-            <p class="text-xs text-gray-500">
+            <p class="text-xs text-zinc-500">
               SVG, PNG, JPG or GIF (ขนาดไม่เกิน 10 Mb)
             </p>
           </div>
-          <input id="dropzone-file" type="file" class="hidden" />
+          <input
+            id="dropzone-file"
+            type="file"
+            class="hidden"
+            accept=".jpg, .jpeg, .png"
+            on:change={changeHandler}
+          />
         </label>
       </div>
     </div>
@@ -158,7 +225,7 @@
             placeholder="ระดับชั้น"
             size="md"
             items={classes}
-            bind:inputValue={createPost.primaryClass}
+            bind:inputValue={createPost.class}
           />
         </div>
         <div class="pt-[24px]">
@@ -183,7 +250,7 @@
           {#each hashtags as hashtag}
             <span
               id="badge-dismiss-default"
-              class="inline-flex items-center py-1 px-3 mr-1 mt-1 text-sm font-medium text-gray-700 bg-gray-200 rounded-2xl"
+              class="inline-flex items-center py-1 px-3 mr-1 mt-1 text-sm font-medium text-zinc-700 bg-gray-200 rounded-2xl"
             >
               {hashtag.name}
             </span>

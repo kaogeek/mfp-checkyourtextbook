@@ -23,7 +23,7 @@
     >
   {/if}
   <!-- <Iconinput
-    noBorderInputClass="bg-inherit border border-gray-300 text-gray-900 rounded-lg"
+    noBorderInputClass="bg-inherit border border-gray-300 text-zinc-900 rounded-lg"
     noBorder
     {size}
     {placeholder}
@@ -31,7 +31,7 @@
   >
     <svg
       aria-hidden="true"
-      class="w-5 h-5 text-gray-500 dark:text-gray-400"
+      class="w-5 h-5 text-zinc-500 dark:text-zinc-400"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -50,7 +50,7 @@
     >
       <svg
         aria-hidden="true"
-        class="w-5 h-5 text-gray-500 dark:text-gray-400"
+        class="w-5 h-5 text-zinc-500 dark:text-zinc-400"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -65,7 +65,7 @@
     </div>
     <input
       type="text"
-      class="{customClass} bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10"
+      class="{customClass} bg-white border border-gray-300 text-zinc-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10"
       {placeholder}
       bind:value={inputValue}
     />

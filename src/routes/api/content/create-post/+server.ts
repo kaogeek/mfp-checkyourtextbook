@@ -1,6 +1,8 @@
 import getCollection from '$core/functions/collection';
+import { Visibility } from '$models';
 import { json } from '@sveltejs/kit';
 import { ObjectId } from 'mongodb';
+import { Aggregation } from '../aggregation';
 
 export async function POST({ request }: { request: Request }) {
   const body = await request.json();
@@ -32,34 +34,45 @@ export async function POST({ request }: { request: Request }) {
     return {
       name: hashtag,
       slug: hashtag.replace(/\s/g, '_'),
-      visibility: 'publish',
+      visibility: Visibility.PUBLISH,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
   });
 
-  await Promise.all([
-    hashtagCollection.insertMany(prepareHashtags),
+  const [insert] = await Promise.all([
     contentCollection.insertOne({
       ...body,
       photo: {
-        url: 'https://via.placeholder.com/300x120/808080/ffffff?text=+',
+        url: `http://placeimg.com/${Math.floor(
+          Math.random() * (600 - 300 + 1) + 300
+        )}/${Math.floor(Math.random() * (600 - 300 + 1) + 300)}/business`,
         size: body.photo.size,
       },
-      visibility: 'publish',
+      hashtag: body.hashtag.map((hashtag: string) =>
+        hashtag.replace(/\s/g, '_')
+      ),
+      visibility: Visibility.PUBLISH,
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
+    hashtagCollection.insertMany(prepareHashtags),
   ]);
 
-  console.log(body);
+  const pipelines = Aggregation.getContents(
+    {
+      _id: new ObjectId(insert.insertedId),
+      visibility: Visibility.PUBLISH,
+    },
+    { _id: -1 },
+    0,
+    10,
+    user._id
+  );
+  const [content] = await contentCollection.aggregate(pipelines);
 
-  // await contentCollection.insertOne({
-  //   status: body.status,
-  //   contentId: new ObjectId(body.contentId),
-  //   userId: new ObjectId(user._id),
-  //   reason: body.reason,
-  // });
-
-  return json({});
+  return json({
+    user,
+    content,
+  });
 }

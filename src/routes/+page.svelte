@@ -1,6 +1,5 @@
 <script lang="ts">
   import InfiniteLoading, { type InfiniteEvent } from 'svelte-infinite-loading';
-
   import {
     SwiperSubject,
     GridContent,
@@ -11,12 +10,23 @@
   import { Environments } from '$environment';
   import type { ContentGrid, Subject } from '$models';
   import apiCall, { Endpoints } from '$core/functions/call';
-  import { searchStore } from '$core';
+  import {
+    contentStore,
+    searchCategory,
+    searchClassStore,
+    searchStore,
+    searchSubjectStore,
+  } from '$core';
   import { onMount } from 'svelte';
 
   let page = 1;
-  let items: ContentGrid[] = [];
-  let searchText: string;
+  let contents: ContentGrid[] = [];
+  let search = {
+    searchText: '',
+    searchClass: '',
+    searchSubject: '',
+    searchCategory: '',
+  };
   let initialSearch: boolean = false;
   let infiniteEventCustom: InfiniteEvent;
 
@@ -24,35 +34,61 @@
     subjects: Subject[];
   };
 
+  async function loadNew() {
+    if (initialSearch && infiniteEventCustom) {
+      page = 1;
+      infiniteEventCustom.detail.reset();
+      infiniteHandler(infiniteEventCustom);
+    }
+  }
+
   onMount(() => {
+    searchClassStore.subscribe(async (value) => {
+      search.searchClass = value;
+      await loadNew();
+    });
+
+    searchSubjectStore.subscribe(async (value) => {
+      search.searchSubject = value;
+      await loadNew();
+    });
+
+    searchCategory.subscribe(async (value) => {
+      search.searchCategory = value;
+      await loadNew();
+    });
+
     searchStore.subscribe(async (value) => {
-      searchText = value;
+      search.searchText = value;
+      await loadNew();
+    });
 
-      if (initialSearch) {
-        page = 1;
-        infiniteEventCustom.detail.reset();
-
-        const contents = await loadData();
-        items = contents;
-
-        if (!contents.length) {
-          infiniteEventCustom.detail.complete();
-        }
-
-        infiniteEventCustom.detail.loaded();
-
-        page += 1;
+    contentStore.subscribe(async (value: any) => {
+      const index = contents.findIndex(({ _id }) => _id === value._id);
+      if (index > -1) {
+        contents[index] = value;
+      } else {
+        if (Object.values(value).length) await loadNew();
       }
     });
   });
 
   async function loadData(): Promise<ContentGrid[]> {
     const userId = localStorage.getItem('userId');
+
     return apiCall(fetch, Endpoints.getContent, {
       method: 'GET',
       pathParams: [
-        `?page=${page}${searchText ? `&search=${searchText}` : ''}${
-          userId ? `&userId=${userId}` : ''
+        `?page=${page}${
+          search.searchText ? `&searchText=${search.searchText}` : ''
+        }${userId ? `&userId=${userId}` : ''}${
+          search.searchClass ? `&searchClass=${search.searchClass}` : ''
+        }${
+          search.searchSubject ? `&searchSubject=${search.searchSubject}` : ''
+        }${
+          search.searchCategory
+            ? `&searchCategory=${search.searchCategory}`
+            : ''
         }`,
       ],
     });
@@ -60,15 +96,26 @@
 
   async function infiniteHandler(infiniteEvent: InfiniteEvent) {
     infiniteEventCustom = infiniteEvent;
-    const contents = await loadData();
+    const contentsReps = await loadData();
+
+    if (page === 1) contents = [];
 
     page += 1;
 
-    if (!contents.length) {
+    if (!contentsReps.length) {
       infiniteEvent.detail.complete();
     }
+    contents = [
+      ...contents,
+      ...contentsReps.filter((content) => {
+        const findContent = contents.find(
+          (newContent) => newContent._id === content._id
+        );
+        if (findContent) return false;
+        return true;
+      }),
+    ];
 
-    items = [...items, ...contents];
     infiniteEvent.detail.loaded();
 
     if (!initialSearch) initialSearch = true;
@@ -79,30 +126,31 @@
   <title>{Environments.APP_TITLE}</title>
 </svelte:head>
 
-<section>
+<section class="px-0 sm:px-4">
   <Searcher />
 </section>
 
-<section class="mt-5">
-  <Submenu />
-</section>
+<section class="px-4 sm:px-4 mb-5 text-center">
+  <div class="mt-5">
+    <Submenu />
+  </div>
+  <div class="mt-5">
+    <SwiperSubject items={data.subjects} />
+  </div>
 
-<section class="mt-5">
-  <SwiperSubject items={data.subjects} />
-</section>
-
-<section class="mt-5 text-center">
-  <Heading customSize="" tag="h4" class="mb-2">ช่วยกันตรวจความบ้ง</Heading>
-  <P
-    class="mb-8"
-    align="center"
-    size="sm"
-    space="normal"
-    weight="light"
-    opacity={1}>บ้ง ไม่บ้งยังไง มาช่วยกันบอก</P
-  >
-  <GridContent bind:items />
-  <InfiniteLoading on:infinite={infiniteHandler} distance={200} />
+  <div class="mt-5">
+    <Heading customSize="" tag="h4" class="mb-2">ช่วยกันตรวจความบ้ง</Heading>
+    <P
+      class="mb-8"
+      align="center"
+      size="sm"
+      space="normal"
+      weight="light"
+      opacity={1}>บ้ง ไม่บ้งยังไง มาช่วยกันบอก</P
+    >
+  </div>
+  <GridContent bind:items={contents} />
+  <InfiniteLoading on:infinite={infiniteHandler} />
 </section>
 
 <style>
