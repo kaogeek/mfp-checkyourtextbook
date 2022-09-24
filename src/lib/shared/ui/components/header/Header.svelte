@@ -1,10 +1,11 @@
 <script lang="ts">
   import logo from '$assets/images/favicon.png';
-  import arrowDowmIcon from '$assets/vectors/arrow-down.svg';
+  import arrowDownIcon from '$assets/vectors/arrow-down.svg';
 
   import { Endpoints } from '$core';
   import apiCall from '$core/functions/call';
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
   import { SwiperClass } from '../swiper';
 
   export let isOpenModalCreate: boolean = false;
@@ -20,13 +21,15 @@
     primaryClass = [
       {
         name: 'ทุกระดับชั้น',
+        seq: 0,
       },
     ];
 
     primaryClass.push(
       ...primaryClasses.map((item: any) => {
         return {
-          name: item.class,
+          name: item.name,
+          seq: item.seq,
         };
       })
     );
@@ -41,17 +44,26 @@
   >
     <div class="flex flex-wrap justify-between items-center mx-auto">
       <a href="/" class="flex items-center min-w-[90px]">
-        <img src={logo} class="mx-2 h-8 sm:h-7" alt="Checkyourtextbook Logo" />
+        <img src={logo} class="mx-2 h-8 sm:h-7" alt="Checkyourtextbook logo" />
       </a>
 
       <div class="absolute bottom-0 left-1/2 translate-x-[-50%]">
         <div
-          class="after:bg-[url({arrowDowmIcon})] after:absolute after:bottom-0 after:h-3 mt-2 text-[13px] bg-gray-200 h-11 flex items-center justify-center rounded-t-lg px-3 cursor-pointer text-gray-600 select-none"
+          class=" mt-2 text-[13px] bg-gray-200 h-11 flex flex-col items-center justify-center rounded-t-lg px-3 cursor-pointer text-zinc-600 select-none"
           on:click={() => {
             toggleClassMenu = !toggleClassMenu;
           }}
         >
-          ทุกระดับการศึกษา
+          <p>เลือกระดับการศึกษา</p>
+          <div class="absolute bottom-[4px]">
+            {#if !toggleClassMenu}
+              <img
+                src={arrowDownIcon}
+                in:fade={{ duration: 300 }}
+                alt="arrow down icon"
+              />
+            {/if}
+          </div>
         </div>
       </div>
 
@@ -70,10 +82,12 @@
   </nav>
   <div
     class="{toggleClassMenu ? 'h-[130px]' : 'h-0'} {scrollY > 1
-      ? 'shadow-md'
-      : ''} overflow-hidden flex justify-center duration-300 bg-gray-200"
+      ? 'shadow'
+      : ''} overflow-hidden flex justify-center duration-300 bg-gray-200 sm:bg-white"
   >
-    <div class=" flex items-center p-3 w-[100%] sm:w-[60%]">
+    <div
+      class=" flex items-center p-3 w-[100%] sm:w-[60vw] md:w-[60vw] md:w-[50vw]"
+    >
       <SwiperClass bind:items={primaryClass} />
     </div>
   </div>

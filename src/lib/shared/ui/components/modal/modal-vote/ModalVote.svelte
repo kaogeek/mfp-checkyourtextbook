@@ -19,7 +19,8 @@
     name: '',
     contentId: '',
   };
-  let disabled: boolean;
+  let disabled: boolean = false;
+  let disabledName: boolean = false;
 
   voteData.status = iconVote;
 
@@ -31,7 +32,7 @@
         pathParams: [`?userId=${userId}`],
       });
 
-      if (user) disabled = true;
+      if (user) disabledName = true;
       voteData.name = user?.aliasName ?? '';
     }
 
@@ -40,18 +41,24 @@
 
   async function vote() {
     if (Object.values(voteData).every((value) => value)) {
-      const { user, content } = await apiCall(fetch, Endpoints.postEngagement, {
-        method: 'POST',
-        body: JSON.stringify(voteData),
-      });
+      disabled = true;
+      const { user, content } = await apiCall(
+        fetch,
+        Endpoints.createEngagementComment,
+        {
+          method: 'POST',
+          body: JSON.stringify(voteData),
+        }
+      );
 
       localStorage.setItem('userId', user._id);
       localStorage.setItem('name', user.aliasName);
 
       data = content;
 
+      disabled = false;
       contentStore.set(content);
-      isOpenModalVote = false;
+      isOpenModalVote = !isOpenModalVote;
     } else {
     }
   }
@@ -65,6 +72,7 @@
 >
   <div class="text-right">
     <Button
+      {disabled}
       on:click={() => {
         vote();
       }}
@@ -83,7 +91,7 @@
 
   <div class="text-left">
     <Textarea
-      placeholder="ทำไมถึงคิดว่าไม่บ้ง"
+      placeholder="ทำไมถึงคิดว่า{iconVote === 'upvote' ? 'ไม่บ้ง' : 'บ้ง'}"
       rows={4}
       bind:inputValue={voteData.reason}
     />
@@ -93,7 +101,7 @@
       placeholder="ไม่ต้องใส่ชื่อจริงมานะ"
       size="md"
       customClass="h-12"
-      bind:disabled
+      bind:disabled={disabledName}
       bind:inputValue={voteData.name}
     />
   </div>

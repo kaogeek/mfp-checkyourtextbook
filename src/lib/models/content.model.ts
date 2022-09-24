@@ -16,6 +16,7 @@ export interface Content {
 export interface ContentGrid {
   _id: string;
   title: string;
+  author: string;
   description: string;
   photo: {
     url: string;

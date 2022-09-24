@@ -1,2 +1,2 @@
 export * from './http-code';
-export * from './currency';
+export * from './common';

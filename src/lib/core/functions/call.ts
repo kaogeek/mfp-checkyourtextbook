@@ -8,7 +8,9 @@ export enum Endpoints {
   getSecondaryClass = '/api/metadata/secondary-class',
   getSubject = '/api/metadata/subject',
   getUserById = '/api/user/get-user-id',
-  postEngagement = '/api/content/create-engagement',
+  createEngagementComment = '/api/content/create-engagement-comment',
+  getEngagementComment = '/api/content/get-engagement-comment',
+
 }
 
 type Props = {
