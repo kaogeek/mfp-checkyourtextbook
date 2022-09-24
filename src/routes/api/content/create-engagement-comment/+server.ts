@@ -8,9 +8,9 @@ export async function POST({ request }: { request: Request }) {
   const body = await request.json();
 
   const {
+    engagements: engagementCollection,
     users: userCollection,
     contents: contentCollection,
-    hashtags: hashtagCollection,
   } = await getCollection();
 
   let user = await userCollection.findOne({ aliasName: body.name });
@@ -29,39 +29,18 @@ export async function POST({ request }: { request: Request }) {
       aliasName: body.name,
     };
   }
-
-  const prepareHashtags = body.hashtag.map((hashtag: any) => {
-    return {
-      name: hashtag,
-      slug: hashtag.replace(/\s/g, '_'),
-      visibility: Visibility.PUBLISH,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+  await engagementCollection.insertOne({
+    status: body.status,
+    contentId: new ObjectId(body.contentId),
+    userId: new ObjectId(user._id),
+    reason: body.reason,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   });
-
-  const [insert] = await Promise.all([
-    contentCollection.insertOne({
-      ...body,
-      photo: {
-        url: `http://placeimg.com/${Math.floor(
-          Math.random() * (600 - 300 + 1) + 300
-        )}/${Math.floor(Math.random() * (600 - 300 + 1) + 300)}/business`,
-        size: body.photo.size,
-      },
-      hashtag: body.hashtag.map((hashtag: string) =>
-        hashtag.replace(/\s/g, '_')
-      ),
-      visibility: Visibility.PUBLISH,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-    hashtagCollection.insertMany(prepareHashtags),
-  ]);
 
   const pipelines = Aggregation.getContents(
     {
-      _id: new ObjectId(insert.insertedId),
+      _id: new ObjectId(body.contentId),
       visibility: Visibility.PUBLISH,
     },
     { _id: -1 },
@@ -69,6 +48,7 @@ export async function POST({ request }: { request: Request }) {
     10,
     user._id
   );
+
   const [content] = await contentCollection.aggregate(pipelines);
 
   return json({

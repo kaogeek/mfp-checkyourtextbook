@@ -1,6 +1,5 @@
 <script lang="ts">
   import InfiniteLoading, { type InfiniteEvent } from 'svelte-infinite-loading';
-
   import {
     SwiperSubject,
     GridContent,
@@ -36,20 +35,10 @@
   };
 
   async function loadNew() {
-    if (initialSearch) {
+    if (initialSearch && infiniteEventCustom) {
       page = 1;
       infiniteEventCustom.detail.reset();
-
-      const contentsReps = await loadData();
-      contents = contentsReps;
-
-      if (!contents.length) {
-        infiniteEventCustom.detail.complete();
-      }
-
-      infiniteEventCustom.detail.loaded();
-
-      page += 1;
+      infiniteHandler(infiniteEventCustom);
     }
   }
 
@@ -86,6 +75,7 @@
 
   async function loadData(): Promise<ContentGrid[]> {
     const userId = localStorage.getItem('userId');
+
     return apiCall(fetch, Endpoints.getContent, {
       method: 'GET',
       pathParams: [
@@ -108,12 +98,13 @@
     infiniteEventCustom = infiniteEvent;
     const contentsReps = await loadData();
 
+    if (page === 1) contents = [];
+
     page += 1;
 
     if (!contentsReps.length) {
       infiniteEvent.detail.complete();
     }
-
     contents = [
       ...contents,
       ...contentsReps.filter((content) => {
@@ -135,30 +126,31 @@
   <title>{Environments.APP_TITLE}</title>
 </svelte:head>
 
-<section>
+<section class="px-0 sm:px-4">
   <Searcher />
 </section>
 
-<section class="mt-5">
-  <Submenu />
-</section>
+<section class="px-4 sm:px-4 mb-5 text-center">
+  <div class="mt-5">
+    <Submenu />
+  </div>
+  <div class="mt-5">
+    <SwiperSubject items={data.subjects} />
+  </div>
 
-<section class="mt-5">
-  <SwiperSubject items={data.subjects} />
-</section>
-
-<section class="mt-5 text-center">
-  <Heading customSize="" tag="h4" class="mb-2">ช่วยกันตรวจความบ้ง</Heading>
-  <P
-    class="mb-8"
-    align="center"
-    size="sm"
-    space="normal"
-    weight="light"
-    opacity={1}>บ้ง ไม่บ้งยังไง มาช่วยกันบอก</P
-  >
+  <div class="mt-5">
+    <Heading customSize="" tag="h4" class="mb-2">ช่วยกันตรวจความบ้ง</Heading>
+    <P
+      class="mb-8"
+      align="center"
+      size="sm"
+      space="normal"
+      weight="light"
+      opacity={1}>บ้ง ไม่บ้งยังไง มาช่วยกันบอก</P
+    >
+  </div>
   <GridContent bind:items={contents} />
-  <InfiniteLoading on:infinite={infiniteHandler} distance={200} />
+  <InfiniteLoading on:infinite={infiniteHandler} />
 </section>
 
 <style>

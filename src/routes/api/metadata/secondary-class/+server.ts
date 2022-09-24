@@ -6,19 +6,15 @@ export async function GET() {
 
   const secondaryClass = await classCollection.aggregate([
     {
-      $group: {
-        _id: '$secondaryClass',
-      },
-    },
-    {
       $project: {
         _id: 0,
-        name: '$_id',
+        name: '$secondaryClass',
+        seq: '$secondaryNo',
       },
     },
     {
       $sort: {
-        name: 1,
+        seq: 1,
       },
     },
   ]);

@@ -8,17 +8,19 @@ export async function GET() {
     {
       $group: {
         _id: '$primaryClass',
+        primaryNo: { $last: '$primaryNo' },
       },
     },
     {
       $project: {
         _id: 0,
-        class: '$_id',
+        name: '$_id',
+        seq: '$primaryNo',
       },
     },
     {
       $sort: {
-        class: 1,
+        seq: 1,
       },
     },
   ]);

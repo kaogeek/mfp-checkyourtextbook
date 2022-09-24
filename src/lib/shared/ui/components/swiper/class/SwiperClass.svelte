@@ -7,42 +7,45 @@
 </script>
 
 <Swiper
-  slidesPerView={5}
+  slidesPerView={6}
   spaceBetween={10}
   centeredSlidesBounds={true}
   breakpoints={{
     320: {
-      slidesPerView: 3,
-    },
-    640: {
       slidesPerView: 4,
     },
-    1024: {
+    640: {
       slidesPerView: 5,
     },
+    1024: {
+      slidesPerView: 6,
+    },
     1200: {
-      slidesPerView: 5,
+      slidesPerView: 6,
     },
   }}
 >
   {#each items as item}
-    <SwiperSlide class="rounded-2xl cursor-pointer flex flex-col">
+    <SwiperSlide
+      class="rounded-2xl cursor-pointer hover:bg-gray-50 transition duration-200 py-2"
+    >
       <div
+        class="text-center"
         on:click={() => {
           searchClassStore.set(item.name === 'ทุกระดับชั้น' ? '' : item.name);
         }}
       >
         <Img
-          src="https://i.ytimg.com/vi/aILNohZZJSs/maxresdefault.jpg"
-          class="rounded-2xl h-14 w-full object-cover"
-          alt="sample 1"
+          class="w-[80px]"
+          src="/src/lib/assets/images/classes/{item.seq}.svg"
+          alt={item.name}
         />
         <P
-          class="text-[13px] text-gray-600"
+          class="text-[13px] text-zinc-600"
           align="center"
           space="normal"
           weight="medium"
-          size="sm"
+          size="xs"
           opacity={1}>{item.name}</P
         >
       </div>
