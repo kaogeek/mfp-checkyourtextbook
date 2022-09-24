@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/node';
 import preprocess from 'svelte-preprocess';
 import { resolve } from 'path';
 
