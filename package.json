@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite dev --host 0.0.0.0 --port 3000",
     "build": "vite build --mode development",
-    "build:prod": "npm run check && npm run lint && vite build --mode production",
+    "build:prod": "vite build --mode production",
     "preview": "vite preview --port 3000",
     "test": "playwright test",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -40,6 +40,7 @@
   "type": "module",
   "dependencies": {
     "@sveltejs/adapter-netlify": "^1.0.0-next.78",
+    "@sveltejs/adapter-node": "^1.0.0-next.95",
     "@types/luxon": "^3.0.1",
     "autoprefixer": "^10.4.11",
     "cookie": "^0.5.0",

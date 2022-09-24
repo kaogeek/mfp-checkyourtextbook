@@ -11,11 +11,6 @@ function run_all(fns) {
 function safe_not_equal(a, b) {
     return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
 }
-function validate_store(store, name) {
-    if (store != null && typeof store.subscribe !== 'function') {
-        throw new Error(`'${name}' is not a store with a 'subscribe' method`);
-    }
-}
 function subscribe(store, ...callbacks) {
     if (store == null) {
         return noop;
@@ -361,16 +356,4 @@ function style_object_to_string(style_object) {
         .map(key => `${key}: ${style_object[key]};`)
         .join(' ');
 }
-function validate_dynamic_element(tag) {
-    const is_string = typeof tag === 'string';
-    if (tag && !is_string) {
-        throw new Error('<svelte:element> expects "this" attribute to be a string.');
-    }
-}
-function validate_void_dynamic_element(tag) {
-    if (tag && is_void(tag)) {
-        throw new Error(`<svelte:element this="${tag}"> is self-closing and cannot have content.`);
-    }
-}
-
-export { safe_not_equal as a, add_attribute as b, create_ssr_component as c, compute_rest_props as d, escape as e, validate_dynamic_element as f, getContext as g, validate_void_dynamic_element as h, spread as i, escape_object as j, escape_attribute_value as k, is_void as l, missing_component as m, noop as n, each as o, compute_slots as p, createEventDispatcher as q, onDestroy as r, setContext as s, tick as t, validate_store as u, validate_component as v, subscribe as w };
+export { safe_not_equal as a, add_attribute as b, create_ssr_component as c, compute_rest_props as d, escape as e, spread as f, getContext as g, escape_object as h, escape_attribute_value as i, is_void as j, each as k, compute_slots as l, missing_component as m, noop as n, createEventDispatcher as o, subscribe as p, onDestroy as q, setContext as s, tick as t, validate_component as v };
