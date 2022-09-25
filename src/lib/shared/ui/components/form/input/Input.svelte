@@ -12,12 +12,12 @@
 
 <div class="mb-3 sm:mb-4">
   {#if label}
-    <Label class="block font-medium text-base">{label}</Label>
+    <Label class="block font-normal text-base">{label}</Label>
   {/if}
   {#if description}
     <P
       align="left"
-      size="xs"
+      size="sm"
       space="normal"
       weight="medium"
       opacity={1}
