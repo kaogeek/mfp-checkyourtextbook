@@ -70,7 +70,7 @@
           space="normal"
           weight="normal"
           opacity={1}
-          class="select-none">{item.title}</P
+          class="select-none text-[16px]">{item.title}</P
         >
       </div>
     </section>
