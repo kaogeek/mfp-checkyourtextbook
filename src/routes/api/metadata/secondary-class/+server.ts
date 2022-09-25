@@ -9,7 +9,7 @@ export async function GET() {
       $project: {
         _id: 0,
         name: '$secondaryClass',
-        seq: '$secondaryNo',
+        seq: '$seqSecondary',
       },
     },
     {

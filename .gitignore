@@ -6,6 +6,7 @@
 .output
 .vercel
 /.netlify
+/.svelte-kit
 /build
 /dist
 /package

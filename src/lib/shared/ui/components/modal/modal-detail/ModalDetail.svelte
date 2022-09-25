@@ -4,6 +4,8 @@
     A,
     Button,
     Card,
+    Dropdown,
+    DropdownItem,
     Heading,
     Img,
     Modal,
@@ -11,6 +13,7 @@
     TabHead,
     TabHeadItem,
     TabWrapper,
+    ToolbarButton,
   } from 'flowbite-svelte';
   import bongIconFull from '$assets/vectors/bong-full.svg';
   import notBongIconFull from '$assets/vectors/not-bong-full.svg';
@@ -20,14 +23,17 @@
   import notBongIconActive from '$assets/vectors/not-bong-active.svg';
 
   import likeIcon from '$assets/vectors/like.svg';
-  import unlikeIcon from '$assets/vectors/unlike.svg';
+  import dislikeIcon from '$assets/vectors/dislike.svg';
+  import likeIconActive from '$assets/vectors/like-active.svg';
+  import dislikeIconActive from '$assets/vectors/dislike-active.svg';
+
+  import moreIcon from '$assets/vectors/more.svg';
 
   import zoomIcon from '$assets/vectors/zoom.svg';
   import { Common } from '$utils';
   import { LazyImage } from 'svelte-lazy-image';
   import { ModalVote } from '../modal-vote';
   import { fade } from 'svelte/transition';
-  import { GridContent } from '$ui/components/grid-content';
   import { Endpoints } from '$core';
   import apiCall from '$core/functions/call';
   import InfiniteLoading, { type InfiniteEvent } from 'svelte-infinite-loading';
@@ -43,15 +49,13 @@
   let isOpenModalVote: boolean = false;
   let pageComment = 1;
   let pageContent = 1;
-
-  let infiniteEventContentCustom: InfiniteEvent;
   let infiniteEventCommentCustom: InfiniteEvent;
-
   let activeTabValue = 1;
-  const handleTab = (tabValue: any) => () => {
+  let userId = localStorage.getItem('userId');
+
+  const handleTab = (tabValue: number) => () => {
     if (activeTabValue !== tabValue) {
       activeTabValue = tabValue;
-
       pageComment = 1;
       if (infiniteEventCommentCustom) {
         infiniteEventCommentCustom.detail.reset();
@@ -80,9 +84,43 @@
     isOpenModalVote = !isOpenModalVote;
   }
 
-  async function loadContents(): Promise<ContentGrid[]> {
-    const userId = localStorage.getItem('userId');
+  async function like(item: EngagementComment) {
+    if (!userId) return;
 
+    const { comment } = await apiCall(fetch, Endpoints.createEngagementLike, {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: userId,
+        commentId: item._id,
+        contentId: item.contentId,
+        status: 'like',
+      }),
+    });
+
+    const index = comments.findIndex(({ _id }) => _id === comment?._id);
+    if (index > -1 && comment) comments[index] = comment;
+  }
+
+  async function dislike(item: EngagementComment) {
+    if (!userId) return;
+
+    const { comment } = await apiCall(fetch, Endpoints.createEngagementLike, {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: userId,
+        commentId: item._id,
+        contentId: item.contentId,
+        status: 'dislike',
+      }),
+    });
+
+    const index = comments.findIndex(({ _id }) => _id === comment?._id);
+    if (index > -1 && comment) comments[index] = comment;
+  }
+
+  async function reporting() {}
+
+  async function loadContents(): Promise<ContentGrid[]> {
     return apiCall(fetch, Endpoints.getContent, {
       method: 'GET',
       pathParams: [`?page=${pageContent}${userId ? `&userId=${userId}` : ''}`],
@@ -90,8 +128,6 @@
   }
 
   async function loadComments(): Promise<EngagementComment[]> {
-    const userId = localStorage.getItem('userId');
-
     return apiCall(fetch, Endpoints.getEngagementComment, {
       method: 'GET',
       pathParams: [
@@ -103,7 +139,6 @@
   }
 
   async function infiniteContentHandler(infiniteEvent: InfiniteEvent) {
-    infiniteEventContentCustom = infiniteEvent;
     if (pageContent > 5) {
       infiniteEvent.detail.complete();
       return;
@@ -168,11 +203,35 @@
     {#each hashtags ?? [] as hashtag}
       <span
         id="badge-dismiss-default"
-        class="inline-flex items-center py-1 px-3 mr-1 mb-2 text-sm font-medium text-blue-800 bg-blue-100 rounded-2xl"
+        class="inline-flex items-center py-1 px-3 mr-1 mb-2 text-sm font-medium text-zinc-600 bg-gray-200 rounded-2xl"
       >
         {hashtag}
       </span>
     {/each}
+  </div>
+
+  <div class="absolute top-0 right-5">
+    <!-- <Img src="{moreIcon}" /> -->
+    <ToolbarButton
+      class="dots-menu text-gray-900 bg-white dark:text-white dark:bg-gray-800"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-7 h-7"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+        /></svg
+      >
+    </ToolbarButton>
+    <Dropdown triggeredBy=".dots-menu">
+      <DropdownItem on:click={() => reporting()}>รายงาน</DropdownItem>
+    </Dropdown>
   </div>
 
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
@@ -331,7 +390,7 @@
                 >
               </TabHead>
             </TabWrapper>
-            <div class="h-[55vh] overflow-y-scroll">
+            <div class="h-[60vh] overflow-y-scroll">
               {#each comments as comment}
                 <Card
                   size="xl"
@@ -356,7 +415,7 @@
                   </P>
 
                   <div class="flex justify-between mt-2">
-                    <div>
+                    <div class="flex items-center">
                       <P
                         class="text-zinc-400 text-[12px]"
                         color="text-zinc-500"
@@ -376,14 +435,28 @@
                     </div>
                     <div class="flex gap-2">
                       <div
-                        class="flex text-zinc-400 text-[12px] items-center gap-1 select-none cursor-pointer"
+                        on:click={() => like(comment)}
+                        class="flex text-zinc-400 text-[12px] items-center gap-1 select-none cursor-pointer rounded-md p-1 hover:bg-gray-100 active:bg-gray-200"
                       >
-                        <Img src={likeIcon} class="w-[12px]" /> <span>100</span>
+                        <Img
+                          src={comment.like ? likeIconActive : likeIcon}
+                          class="w-[12px]"
+                        />
+                        <span class={comment.like ? 'text-[#44A5FF]' : ''}
+                          >{Common.formatCurrency(comment.likeCount)}</span
+                        >
                       </div>
                       <div
-                        class="flex text-zinc-400 text-[12px] items-center gap-1 select-none cursor-pointer"
+                        on:click={() => dislike(comment)}
+                        class="flex text-zinc-400 text-[12px] items-center gap-1 select-none cursor-pointer rounded-md p-1 hover:bg-gray-100 active:bg-gray-200"
                       >
-                        <Img src={unlikeIcon} class="w-[13px]" /><span>100</span
+                        <Img
+                          src={comment.dislike
+                            ? dislikeIconActive
+                            : dislikeIcon}
+                          class="w-[13px]"
+                        /><span class={comment.dislike ? 'text-[#FA2A4F]' : ''}
+                          >{Common.formatCurrency(comment.dislikeCount)}</span
                         >
                       </div>
                     </div>
@@ -399,7 +472,9 @@
   </div>
   {#if isOpenComment}
     <div class="text-left" in:fade>
-      <Heading tag="h6" class="mb-3">เรื่องบ้งอื่นๆ ที่คุณอาจสนใจ</Heading>
+      {#if contents.length}<Heading tag="h6" class="mb-3"
+          >เรื่องบ้งอื่นๆ ที่คุณอาจสนใจ</Heading
+        >{/if}
       <Masonry
         let:item
         items={contents}

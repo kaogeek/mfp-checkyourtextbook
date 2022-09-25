@@ -9,6 +9,7 @@ export enum Endpoints {
   getSubject = '/api/metadata/subject',
   getUserById = '/api/user/get-user-id',
   createEngagementComment = '/api/content/create-engagement-comment',
+  createEngagementLike = '/api/content/create-engagement-like',
   getEngagementComment = '/api/content/get-engagement-comment',
 
 }

@@ -5,6 +5,7 @@
     GridContent,
     Searcher,
     Submenu,
+    ModalCreate,
   } from '$ui/components';
   import { Heading, P } from 'flowbite-svelte';
   import { Environments } from '$environment';
@@ -19,6 +20,12 @@
   } from '$core';
   import { onMount } from 'svelte';
 
+  let isOpenModalCreate: boolean = false;
+
+  export let data: {
+    subjects: Subject[];
+  };
+
   let page = 1;
   let contents: ContentGrid[] = [];
   let search = {
@@ -29,10 +36,6 @@
   };
   let initialSearch: boolean = false;
   let infiniteEventCustom: InfiniteEvent;
-
-  export let data: {
-    subjects: Subject[];
-  };
 
   async function loadNew() {
     if (initialSearch && infiniteEventCustom) {
@@ -130,6 +133,16 @@
   <Searcher />
 </section>
 
+<section class="text-center mt-5 sm:hidden">
+  <button
+    type="button"
+    class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
+    on:click={() => {
+      isOpenModalCreate = true;
+    }}>รายงานความบ้ง</button
+  >
+</section>
+
 <section class="px-4 sm:px-4 mb-5 text-center">
   <div class="mt-5">
     <Submenu />
@@ -152,6 +165,10 @@
   <GridContent bind:items={contents} />
   <InfiniteLoading on:infinite={infiniteHandler} />
 </section>
+
+{#if isOpenModalCreate}
+  <ModalCreate bind:isOpenModalCreate />
+{/if}
 
 <style>
 </style>
