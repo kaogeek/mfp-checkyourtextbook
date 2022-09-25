@@ -16,8 +16,29 @@
 @tailwind utilities;
 
 :root {
-  font-family: Prompt, sans-serif;
+  @apply custom-font-anakotmai;
+  font-weight: normal;
+
   --color-black: var(--color-black);
+}
+
+.custom-font-anakotmai {
+  font-family: 'Anakotmai', sans-serif;
+}
+
+.custom-font-pracharath {
+  font-family: 'Pracharath', sans-serif;
+}
+
+p {
+  @apply custom-font-pracharath;
+  font-size: 1rem;
+}
+
+input,
+select,
+textarea {
+  font-weight: normal;
 }
 
 .swiper-slide {

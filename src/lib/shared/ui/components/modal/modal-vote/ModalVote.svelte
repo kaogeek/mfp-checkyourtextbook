@@ -99,7 +99,7 @@
       label="ผู้แจ้งบ้ง"
       description="คุณคือหนึ่งในผู้ร่วมระดับการศึกษาไทย"
       placeholder="ไม่ต้องใส่ชื่อจริงมานะ"
-      size="md"
+      size="sm"
       customClass="h-12"
       bind:disabled={disabledName}
       bind:inputValue={voteData.name}

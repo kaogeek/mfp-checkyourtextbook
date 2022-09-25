@@ -12,14 +12,13 @@
 <section in:fade>
   <div class="mb-2">
     <div class="text-left px-2 sm:px-16">
-      <Heading tag="h6">บ้งรายวิชา</Heading>
+      <Heading tag="h5">บ้งรายวิชา</Heading>
       <P
         align="left"
-        size="xs"
         space="normal"
-        weight="light"
+        weight="normal"
         opacity={1}
-        class="mb-1 text-zinc-400">เรียงตามวิชาที่บ้งบ่อยที่สุด</P
+        class="mb-1 text-zinc-400 text-[1rem]">เรียงตามวิชาที่บ้งบ่อยที่สุด</P
       >
     </div>
     <Swiper
@@ -60,15 +59,9 @@
             />
 
             <div
-              class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"
+              class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] text-white"
             >
-              <P
-                class="text-white"
-                align="center"
-                space="normal"
-                weight="medium"
-                opacity={1}>{subject.name}</P
-              >
+              {subject.name}
             </div>
           </div>
         </SwiperSlide>
