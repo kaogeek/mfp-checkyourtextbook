@@ -216,7 +216,7 @@
         bind:inputValue={createPost.description}
       />
 
-      <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+      <div class="grid sm:grid-cols-2 sm:gap-2">
         <div>
           <Label for="large-input" class="block font-medium text-base"
             >ที่มาความบ้ง</Label
@@ -228,7 +228,7 @@
             bind:inputValue={createPost.class}
           />
         </div>
-        <div class="pt-[24px]">
+        <div class="sm:pt-[24px]">
           <Select
             placeholder="วิชาเรียน"
             size="md"
@@ -246,11 +246,11 @@
           customClass="h-12"
           bind:inputValue={selectTag}
         />
-        <div class="mt-[-12px] mb-[14px]">
+        <div class="mt-[-5px] sm:mt-[-12px] mb-4 min-h-[32px]">
           {#each hashtags as hashtag}
             <span
               id="badge-dismiss-default"
-              class="inline-flex items-center py-1 px-3 mr-1 mt-1 text-sm font-medium text-zinc-700 bg-gray-200 rounded-2xl"
+              class="select-none cursor-pointer inline-flex items-center py-1 px-3 mr-1 mt-1 text-sm font-medium text-zinc-700 bg-gray-200 rounded-2xl"
             >
               {hashtag.name}
             </span>

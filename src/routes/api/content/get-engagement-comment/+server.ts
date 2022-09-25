@@ -1,6 +1,5 @@
 import getCollection from '$core/functions/collection';
 import { json } from '@sveltejs/kit';
-import { Visibility } from '$models';
 import { Aggregation, type SortContent } from '../aggregation';
 import { ObjectId } from 'mongodb';
 
@@ -25,6 +24,7 @@ export async function GET({ url }: { url: URL }) {
   if (Number(page) > 1) skip = Number(page) * 10;
 
   const pipelines = Aggregation.getComments(filters, sort, skip, limit, userId);
+
   const comments = await engagementCollection.aggregate(pipelines);
 
   return json(comments);

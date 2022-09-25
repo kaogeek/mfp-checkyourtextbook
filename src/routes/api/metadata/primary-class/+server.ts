@@ -8,14 +8,14 @@ export async function GET() {
     {
       $group: {
         _id: '$primaryClass',
-        primaryNo: { $last: '$primaryNo' },
+        seqPrimary: { $last: '$seqPrimary' },
       },
     },
     {
       $project: {
         _id: 0,
         name: '$_id',
-        seq: '$primaryNo',
+        seq: '$seqPrimary',
       },
     },
     {

@@ -11,7 +11,7 @@
 
 <section in:fade>
   <div class="mb-2">
-    <div class="text-left px-16">
+    <div class="text-left px-2 sm:px-16">
       <Heading tag="h6">บ้งรายวิชา</Heading>
       <P
         align="left"
@@ -23,7 +23,7 @@
       >
     </div>
     <Swiper
-      class="px-16 py-5"
+      class="px-1 sm:px-16 py-5"
       slidesPerView={6}
       spaceBetween={15}
       breakpoints={{
