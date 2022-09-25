@@ -39,12 +39,12 @@ export class Aggregation {
           from: 'engagementCount',
           localField: '_id',
           foreignField: 'contentId',
-          as: 'engagementsCount',
+          as: 'engagementCount',
         },
       },
       {
         $unwind: {
-          path: '$engagementsCount',
+          path: '$engagementCount',
           preserveNullAndEmptyArrays: true,
         },
       },
@@ -142,14 +142,15 @@ export class Aggregation {
           photo: 1,
           hashtag: 1,
           author: '$users.aliasName',
-          upvoteCount: { $ifNull: ['$engagementsCount.upvote', 0] },
-          downvoteCount: { $ifNull: ['$engagementsCount.downvote', 0] },
+          upvoteCount: { $ifNull: ['$engagementCount.upvote', 0] },
+          downvoteCount: { $ifNull: ['$engagementCount.downvote', 0] },
           upvote: { $cond: [{ $ifNull: ['$upvote', false] }, true, false] },
           downvote: { $cond: [{ $ifNull: ['$downvote', false] }, true, false] },
         },
       },
     ];
   }
+
   static getComments(
     filters: { [key: string]: any },
     sort: SortContent,
@@ -172,6 +173,20 @@ export class Aggregation {
       },
       {
         $lookup: {
+          from: 'engagementLikeCount',
+          localField: '_id',
+          foreignField: 'commentId',
+          as: 'engagementLikeCount',
+        },
+      },
+      {
+        $unwind: {
+          path: '$engagementLikeCount',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
           from: 'users',
           localField: 'userId',
           foreignField: '_id',
@@ -184,11 +199,91 @@ export class Aggregation {
         },
       },
       {
+        $lookup: {
+          from: 'engagements',
+          let: {
+            commentId: '$_id',
+            userId: userId ? new ObjectId(userId) : null,
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ['$userId', '$$userId'] },
+                    { $eq: ['$commentId', '$$commentId'] },
+                    { $eq: ['$status', 'like'] },
+                  ],
+                },
+              },
+            },
+            {
+              $limit: 1,
+            },
+            {
+              $project: {
+                value: true,
+              },
+            },
+          ],
+          as: 'like',
+        },
+      },
+      {
+        $unwind: {
+          path: '$like',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'engagements',
+          let: {
+            commentId: '$_id',
+            userId: userId ? new ObjectId(userId) : null,
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ['$userId', '$$userId'] },
+                    { $eq: ['$commentId', '$$commentId'] },
+                    { $eq: ['$status', 'dislike'] },
+                  ],
+                },
+              },
+            },
+            {
+              $limit: 1,
+            },
+            {
+              $project: {
+                _id: 1,
+              },
+            },
+          ],
+          as: 'dislike',
+        },
+      },
+      {
+        $unwind: {
+          path: '$dislike',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
         $project: {
           status: 1,
           reason: 1,
+          contentId: 1,
+          commentId: 1,
           createdAt: 1,
           author: '$users.aliasName',
+          likeCount: { $ifNull: ['$engagementLikeCount.like', 0] },
+          dislikeCount: { $ifNull: ['$engagementLikeCount.dislike', 0] },
+          like: { $cond: [{ $ifNull: ['$like', false] }, true, false] },
+          dislike: { $cond: [{ $ifNull: ['$dislike', false] }, true, false] },
         },
       },
     ];

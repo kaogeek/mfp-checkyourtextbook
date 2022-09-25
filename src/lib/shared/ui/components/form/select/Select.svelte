@@ -10,7 +10,7 @@
   export let items: any[] = [];
 </script>
 
-<div class="mb-6">
+<div class="mb-3 sm:mb-4">
   {#if label}
     <Label for="large-input" class="block font-medium text-base">{label}</Label>
   {/if}
@@ -26,7 +26,7 @@
   {/if}
 
   <Select
-    class="mt-2 bg-transparent"
+    class="mt-1 bg-transparent"
     {size}
     {placeholder}
     {items}
