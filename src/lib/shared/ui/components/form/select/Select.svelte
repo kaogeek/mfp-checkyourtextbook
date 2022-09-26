@@ -26,7 +26,7 @@
   {/if}
 
   <Select
-    class="mt-1 bg-transparent"
+    class="mt-1 bg-transparent h-[42px]"
     {size}
     {placeholder}
     {items}

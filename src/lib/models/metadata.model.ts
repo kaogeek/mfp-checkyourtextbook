@@ -1,7 +1,5 @@
-import type { ObjectId } from 'mongodb';
-
 export interface Subject {
-  _id?: ObjectId;
+  _id?: string;
   name: string;
   slug: string;
   thumbnail: string;

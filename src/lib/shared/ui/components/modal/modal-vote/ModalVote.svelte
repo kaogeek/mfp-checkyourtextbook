@@ -70,7 +70,7 @@
   bind:open={isOpenModalVote}
   on:hide={() => (isOpenModalVote = false)}
 >
-  <div class="text-right">
+  <div class="text-right invisible sm:visible">
     <Button
       {disabled}
       on:click={() => {
@@ -104,5 +104,8 @@
       bind:disabled={disabledName}
       bind:inputValue={voteData.name}
     />
+  </div>
+  <div class="text-center sm:hidden">
+    <Button class="w-full" on:click={() => vote()}>บันทึก</Button>
   </div>
 </Modal>
