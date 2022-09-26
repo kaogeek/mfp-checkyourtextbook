@@ -1,8 +1,25 @@
 <script lang="ts">
   import { searchStore } from '$core';
+  import apiCall, { Endpoints } from '$core/functions/call';
+  import type { ContentGrid } from '$models';
   import { Heading } from 'flowbite-svelte';
+  import { onMount } from 'svelte';
 
   let timer: NodeJS.Timeout;
+
+  let background: ContentGrid;
+
+  onMount(async () => {
+    [background] = await loadContentMost();
+  });
+
+  async function loadContentMost(): Promise<ContentGrid[]> {
+    return apiCall(fetch, Endpoints.getContent, {
+      method: 'GET',
+      pathParams: [`?searchCategory=hot`],
+    });
+  }
+
   const debounce = (event: KeyboardEvent) => {
     const target = event.target as HTMLInputElement;
 
@@ -15,12 +32,15 @@
 
 <div
   class="rounded-none sm:rounded-2xl h-[320px] bg-searcher bg-center bg-no-repeat flex flex-col justify-center self-center"
+  style="background-image: url({background
+    ? background.photo?.url
+    : `https://via.placeholder.com/300x300/cccccc/969696?text=+`});"
 >
   <div class="px-5 sm:px-[20%] md:px-[20%] lg:px-[25%] text-center">
     <Heading
       tag="h2"
       color="text-white leading-normal mb-3"
-      customSize="text-4xl"
+      customSize="text-3xl"
     >
       เพราะการศึกษาไทย ยังมีเรื่องบ้งๆ <br /> ที่เราต้องช่วยกันแก้
     </Heading>
@@ -48,7 +68,7 @@
         on:keyup={debounce}
         placeholder="ค้นหาเรื่องบ้งๆ ในระบบการศึกษาไทย"
         type="text"
-        class="p-4 h-12 bg-white border border-gray-300 text-zinc-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10"
+        class="p-4 h-12 bg-white border border-gray-300 text-zinc-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10"
       />
     </div>
   </div>
@@ -56,7 +76,6 @@
 
 <style>
   div.bg-searcher {
-    background-image: url('https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
     background-size: cover;
   }
 </style>

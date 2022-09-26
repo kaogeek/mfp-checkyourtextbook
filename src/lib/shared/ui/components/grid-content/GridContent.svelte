@@ -70,7 +70,7 @@
           space="normal"
           weight="normal"
           opacity={1}
-          class="select-none">{item.title}</P
+          class="select-none text-[16px]">{item.title}</P
         >
       </div>
     </section>
@@ -79,11 +79,11 @@
         on:click={() => downvote(item)}
         class="{item.downvote
           ? 'text-[#FF6711]'
-          : 'text-zinc-300'} text-[14px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
+          : 'text-zinc-300'} text-[13px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
       >
         <Img
           src={item.downvote ? bongIconActive : bongIcon}
-          class="w-[1.5rem]"
+          class="w-[1.3rem]"
         />&nbsp;{item.downvoteCount
           ? Common.formatShort(item.downvoteCount)
           : ''}
@@ -93,11 +93,11 @@
         on:click={() => upvote(item)}
         class="{item.upvote
           ? 'text-[#44A5FF]'
-          : 'text-zinc-300'} text-[14px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
+          : 'text-zinc-300'} text-[13px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
       >
         <Img
           src={item.upvote ? notBongIconActive : notBongIcon}
-          class="w-[1.5rem]"
+          class="w-[1.3rem]"
         />&nbsp;{item.upvoteCount ? Common.formatShort(item.upvoteCount) : ''}
       </div>
     </div>

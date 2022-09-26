@@ -27,8 +27,6 @@
   import likeIconActive from '$assets/vectors/like-active.svg';
   import dislikeIconActive from '$assets/vectors/dislike-active.svg';
 
-  import moreIcon from '$assets/vectors/more.svg';
-
   import zoomIcon from '$assets/vectors/zoom.svg';
   import { Common } from '$utils';
   import { LazyImage } from 'svelte-lazy-image';
@@ -52,6 +50,8 @@
   let infiniteEventCommentCustom: InfiniteEvent;
   let activeTabValue = 1;
   let userId = localStorage.getItem('userId');
+  let clientHeight: number;
+  let clientHeightActive: number;
 
   const handleTab = (tabValue: number) => () => {
     if (activeTabValue !== tabValue) {
@@ -62,10 +62,6 @@
         infiniteCommentHandler(infiniteEventCommentCustom);
       }
     }
-  };
-
-  let search = {
-    searchText: dataModal.title,
   };
 
   async function upvote(item: ContentGrid) {
@@ -85,7 +81,9 @@
   }
 
   async function like(item: EngagementComment) {
-    if (!userId) return;
+    if (!userId) {
+      return;
+    }
 
     const { comment } = await apiCall(fetch, Endpoints.createEngagementLike, {
       method: 'POST',
@@ -123,7 +121,11 @@
   async function loadContents(): Promise<ContentGrid[]> {
     return apiCall(fetch, Endpoints.getContent, {
       method: 'GET',
-      pathParams: [`?page=${pageContent}${userId ? `&userId=${userId}` : ''}`],
+      pathParams: [
+        `?page=${pageContent}${userId ? `&userId=${userId}` : ''}&hashtag=${
+          dataModal.hashtag
+        }&exclude=${dataModal._id}`,
+      ],
     });
   }
 
@@ -203,7 +205,7 @@
     {#each hashtags ?? [] as hashtag}
       <span
         id="badge-dismiss-default"
-        class="inline-flex items-center py-1 px-3 mr-1 mb-2 text-sm font-medium text-zinc-600 bg-gray-200 rounded-2xl"
+        class="inline-flex items-center py-1 px-3 mr-1 mb-2 text-sm font-normal text-zinc-600 bg-gray-200 rounded-2xl"
       >
         {hashtag}
       </span>
@@ -211,7 +213,6 @@
   </div>
 
   <div class="absolute top-0 right-5">
-    <!-- <Img src="{moreIcon}" /> -->
     <ToolbarButton
       class="dots-menu text-gray-900 bg-white dark:text-white dark:bg-gray-800"
     >
@@ -219,9 +220,9 @@
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        stroke-width="1.5"
+        stroke-width="2"
         stroke="currentColor"
-        class="w-7 h-7"
+        class="w-5 h-5"
         ><path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -274,22 +275,18 @@
     </div>
     <div class="text-left">
       <div
+        bind:clientHeight
         class="{!isOpenComment
-          ? 'h-[90%]'
+          ? `h-[${clientHeight}px]`
           : 'h-0'} overflow-hidden transition-all duration-300"
       >
         <Heading customSize="" tag="h4" class="mb-2">{dataModal.title}</Heading>
         <div class="mb-2">
+          <div class="text-[13px] mb-2">
+            โดย&nbsp;<A size="sm">{dataModal.author}</A>
+          </div>
           <P
-            class="mb-3"
-            align="left"
-            size="xs"
-            space="normal"
-            weight="light"
-            opacity={1}>โดย&nbsp;<A size="xs">{dataModal.author}</A></P
-          >
-          <P
-            class="mb-3"
+            class="mb-3 text-[16px]"
             align="left"
             size="sm"
             space="normal"
@@ -337,14 +334,22 @@
         </div>
       </div>
 
-      <Button
-        color="light"
-        class="w-full border-none"
+      <button
+        type="button"
+        class="w-full text-white {isOpenComment
+          ? 'bg-gray-400 hover:bg-gray-600 focus:ring-gray-200 text-white'
+          : 'bg-white hover:bg-white focus:ring-gray-100 text-[#44A5FF]'} focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
         on:click={() => {
           isOpenComment = !isOpenComment;
+
+          if (isOpenComment) clientHeightActive = clientHeight;
+          if (!isOpenComment) clientHeight = clientHeightActive;
         }}
-        >ความคิดเห็นทั้งหมด ({dataModal.downvoteCount +
-          dataModal.upvoteCount})</Button
+        >{isOpenComment
+          ? 'ซ่อนความคิดเห็นทั้งหมด'
+          : `ความคิดเห็นทั้งหมด (${
+              dataModal.downvoteCount + dataModal.upvoteCount
+            })`}</button
       >
 
       {#if isOpenComment}
@@ -353,7 +358,7 @@
             ? 'h-90%'
             : 'h-0'} overflow-hidden transition duration-300"
         >
-          <div in:fade={{ delay: 300 }} class="mt-4 p-3 bg-gray-200 rounded-lg">
+          <div in:fade class="mt-4 p-3 bg-gray-200 rounded-lg">
             <TabWrapper tabStyle="custom" let:tabStyle {activeTabValue}>
               <TabHead
                 tabId
@@ -403,35 +408,25 @@
                     >
                   </div>
                   <P
-                    class="mt-2"
+                    class="mt-2 text-[16px]"
                     color="text-zinc-500"
                     align="left"
-                    size="xs"
+                    size="sm"
                     space="normal"
-                    weight="light"
+                    weight="normal"
                     opacity={1}
                   >
                     {comment.reason}
                   </P>
 
                   <div class="flex justify-between mt-2">
-                    <div class="flex items-center">
-                      <P
-                        class="text-zinc-400 text-[12px]"
-                        color="text-zinc-500"
-                        align="left"
-                        size="xs"
-                        space="normal"
-                        weight="light"
-                        opacity={1}
-                      >
-                        {Common.convertDateToString(
-                          Common.convertDateRelative(
-                            new Date(comment.createdAt),
-                            new Date()
-                          )
-                        )}
-                      </P>
+                    <div class="flex items-center text-zinc-400 text-[12px]">
+                      {Common.convertDateToString(
+                        Common.convertDateRelative(
+                          new Date(comment.createdAt),
+                          new Date()
+                        )
+                      )}
                     </div>
                     <div class="flex gap-2">
                       <div
@@ -472,9 +467,7 @@
   </div>
   {#if isOpenComment}
     <div class="text-left" in:fade>
-      {#if contents.length}<Heading tag="h6" class="mb-3"
-          >เรื่องบ้งอื่นๆ ที่คุณอาจสนใจ</Heading
-        >{/if}
+      <Heading tag="h6" class="mb-3">เรื่องบ้งอื่นๆ ที่คุณอาจสนใจ</Heading>
       <Masonry
         let:item
         items={contents}
@@ -510,7 +503,7 @@
                 space="normal"
                 weight="normal"
                 opacity={1}
-                class="select-none">{item.title}</P
+                class="select-none text-[16px]">{item.title}</P
               >
             </div>
           </section>

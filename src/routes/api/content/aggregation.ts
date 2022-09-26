@@ -1,7 +1,8 @@
 import { ObjectId } from 'mongodb';
 
 export interface SortContent {
-  _id: number;
+  _id?: number;
+  voteTotal?: number;
 }
 
 export class Aggregation {
@@ -10,9 +11,10 @@ export class Aggregation {
     sort: SortContent,
     skip: number,
     limit: number,
-    userId: string | null
+    userId: string | null,
+    sortMore?: SortContent
   ) {
-    return [
+    const pipelines = [
       {
         $match: filters,
       },
@@ -146,9 +148,19 @@ export class Aggregation {
           downvoteCount: { $ifNull: ['$engagementCount.downvote', 0] },
           upvote: { $cond: [{ $ifNull: ['$upvote', false] }, true, false] },
           downvote: { $cond: [{ $ifNull: ['$downvote', false] }, true, false] },
+          voteTotal: {
+            $add: [
+              { $ifNull: ['$engagementCount.upvote', 0] },
+              { $ifNull: ['$engagementCount.downvote', 0] },
+            ],
+          },
         },
       },
     ];
+
+    if (sortMore?.voteTotal) pipelines.push({ $sort: sortMore });
+
+    return pipelines;
   }
 
   static getComments(

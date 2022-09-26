@@ -7,7 +7,7 @@
 
 <Header bind:isOpenModalCreate bind:scrollY />
 
-<main>
+<main class="mt-3">
   <slot />
 </main>
 
@@ -19,6 +19,7 @@
 
 <style>
   @import url('../app.css');
+  @import url('$assets/fonts.css');
 
   main {
     min-height: calc(100vh - 60px - 68px);

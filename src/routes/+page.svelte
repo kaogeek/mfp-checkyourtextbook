@@ -76,7 +76,7 @@
     });
   });
 
-  async function loadData(): Promise<ContentGrid[]> {
+  async function loadContents(): Promise<ContentGrid[]> {
     const userId = localStorage.getItem('userId');
 
     return apiCall(fetch, Endpoints.getContent, {
@@ -99,7 +99,7 @@
 
   async function infiniteHandler(infiniteEvent: InfiniteEvent) {
     infiniteEventCustom = infiniteEvent;
-    const contentsReps = await loadData();
+    const contentsReps = await loadContents();
 
     if (page === 1) contents = [];
 
@@ -136,14 +136,14 @@
 <section class="text-center mt-5 sm:hidden">
   <button
     type="button"
-    class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
+    class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-5 py-3 text-center"
     on:click={() => {
       isOpenModalCreate = true;
     }}>รายงานความบ้ง</button
   >
 </section>
 
-<section class="px-4 sm:px-4 mb-5 text-center">
+<section class="px-4 sm:px-4 {contents.length ? 'mb-5' : 'mb-16'} text-center">
   <div class="mt-5">
     <Submenu />
   </div>
@@ -152,23 +152,16 @@
   </div>
 
   <div class="mt-5">
-    <Heading customSize="" tag="h4" class="mb-2">ช่วยกันตรวจความบ้ง</Heading>
-    <P
-      class="mb-8"
-      align="center"
-      size="sm"
-      space="normal"
-      weight="light"
-      opacity={1}>บ้ง ไม่บ้งยังไง มาช่วยกันบอก</P
+    <Heading customSize="" tag="h4" class="mb-1.5">ช่วยกันตรวจความบ้ง</Heading>
+    <Heading customSize="text-[16px]" tag="h6" class="mb-10 font-light"
+      >บ้ง ไม่บ้งยังไง มาช่วยกันบอก</Heading
     >
   </div>
   <GridContent bind:items={contents} />
+  <br />
   <InfiniteLoading on:infinite={infiniteHandler} />
 </section>
 
 {#if isOpenModalCreate}
   <ModalCreate bind:isOpenModalCreate />
 {/if}
-
-<style>
-</style>
