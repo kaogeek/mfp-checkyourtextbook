@@ -9,8 +9,8 @@
   export let items: Subject[] = [];
 </script>
 
-<section in:fade>
-  <div class="mb-2">
+<section>
+  <div class="mb-2 min-h-[176px]">
     <div class="text-left px-2 sm:px-16">
       <Heading tag="h5">บ้งรายวิชา</Heading>
       <P
