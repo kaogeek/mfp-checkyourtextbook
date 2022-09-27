@@ -7,7 +7,7 @@
 
 <Header bind:isOpenModalCreate bind:scrollY />
 
-<main class="mt-3">
+<main class="sm:mt-3">
   <slot />
 </main>
 

@@ -155,13 +155,13 @@
 
 <Modal
   size="lg"
-  placement="top-center"
+  placement="center"
   autoclose={false}
   bind:open={isOpenModalCreate}
   on:hide={() => (isOpenModalCreate = false)}
 >
-  <div class="text-right">
-    <Button on:click={() => create()}>สร้าง</Button>
+  <div class="text-right invisible sm:visible">
+    <Button on:click={() => create()}>บันทึก</Button>
   </div>
 
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
@@ -298,5 +298,8 @@
         bind:inputValue={createPost.name}
       />
     </div>
+  </div>
+  <div class="text-center sm:hidden">
+    <Button class="w-full" on:click={() => create()}>บันทึก</Button>
   </div>
 </Modal>

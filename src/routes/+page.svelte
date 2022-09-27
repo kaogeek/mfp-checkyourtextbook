@@ -19,12 +19,11 @@
     searchSubjectStore,
   } from '$core';
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
 
   let isOpenModalCreate: boolean = false;
 
-  export let data: {
-    subjects: Subject[];
-  };
+  export let subjects: Subject[];
 
   let page = 1;
   let contents: ContentGrid[] = [];
@@ -45,7 +44,11 @@
     }
   }
 
-  onMount(() => {
+  onMount(async () => {
+    subjects = await apiCall(fetch, Endpoints.getSubject, {
+      method: 'GET',
+    });
+
     searchClassStore.subscribe(async (value) => {
       search.searchClass = value;
       await loadNew();
@@ -147,8 +150,8 @@
   <div class="mt-5">
     <Submenu />
   </div>
-  <div class="mt-5">
-    <SwiperSubject items={data.subjects} />
+  <div in:fade class="mt-5">
+    <SwiperSubject items={subjects} />
   </div>
 
   <div class="mt-5">
