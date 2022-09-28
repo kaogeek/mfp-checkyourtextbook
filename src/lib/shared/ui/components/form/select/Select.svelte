@@ -1,13 +1,17 @@
 <script lang="ts">
-  import { Label, P, Select } from 'flowbite-svelte';
+  import { Label, P } from 'flowbite-svelte';
+  import Select from 'svelte-select';
 
   export let label: string = '';
   export let description: string = '';
   export let placeholder: string = '';
-  export let size: 'lg' | 'sm' | 'md' | undefined;
   export let inputValue: string;
 
   export let items: any[] = [];
+
+  function handleSelect(event: any) {
+    inputValue = event.detail.value;
+  }
 </script>
 
 <div class="mb-3 sm:mb-4">
@@ -26,10 +30,14 @@
   {/if}
 
   <Select
-    class="mt-1 bg-transparent h-[42px]"
-    {size}
     {placeholder}
     {items}
-    bind:value={inputValue}
+    noOptionsMessage="ไม่พบการค้นหา"
+    showChevron={true}
+    isClearable={false}
+    on:select={handleSelect}
   />
 </div>
+
+<style>
+</style>

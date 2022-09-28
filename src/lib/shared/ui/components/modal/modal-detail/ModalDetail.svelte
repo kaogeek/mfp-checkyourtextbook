@@ -2,7 +2,6 @@
   import type { ContentGrid, EngagementComment } from '$models';
   import {
     A,
-    Button,
     Card,
     Dropdown,
     DropdownItem,
@@ -38,13 +37,13 @@
   import Masonry from 'svelte-bricks';
 
   export let isOpenModal: boolean = false;
+  export let isOpenModalVote: boolean = false;
   export let dataModal: ContentGrid;
   let comments: EngagementComment[] = [];
   let contents: ContentGrid[] = [];
   let hashtags = dataModal.hashtag;
   let iconVote: string = '';
   let isOpenComment: boolean = false;
-  let isOpenModalVote: boolean = false;
   let pageComment = 1;
   let pageContent = 1;
   let infiniteEventCommentCustom: InfiniteEvent;
@@ -70,7 +69,8 @@
     dataModal = item;
 
     isOpenModal = false;
-    isOpenModalVote = !isOpenModalVote;
+
+    isOpenModalVote = true;
   }
 
   function downvote(item: ContentGrid) {
@@ -78,7 +78,7 @@
     dataModal = item;
 
     isOpenModal = false;
-    isOpenModalVote = !isOpenModalVote;
+    isOpenModalVote = true;
   }
 
   async function like(item: EngagementComment) {
@@ -538,7 +538,3 @@
     {/if}
   </Modal>
 </div>
-
-{#if isOpenModalVote}
-  <ModalVote bind:isOpenModalVote bind:iconVote bind:data={dataModal} />
-{/if}

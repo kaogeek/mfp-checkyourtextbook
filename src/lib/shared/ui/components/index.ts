@@ -6,3 +6,4 @@ export { ModalDetail, ModalCreate } from './modal';
 export { Searcher } from './searcher';
 export { Submenu } from './submenu';
 export { SwiperSubject, SwiperClass } from './swiper';
+export { Toast } from './toast';

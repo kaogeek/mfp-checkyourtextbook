@@ -20,6 +20,9 @@
   font-weight: normal;
 
   --color-black: var(--color-black);
+  --bg-primary: #ff6711;
+  --bg-primary-100: #ffceb3;
+  --multiSelectPadding: 0px;
 }
 
 .custom-font-anakotmai {
@@ -42,7 +45,6 @@ textarea {
 }
 .swiper {
   width: 100%;
-  min-height: 120px;
   height: 100%;
 }
 
@@ -81,13 +83,8 @@ textarea {
   @apply text-[13px];
 }
 
-button[aria-label='Close'] {
-  left: 1.2rem;
-  right: auto;
-  top: 1.6rem;
-  border-radius: 25px;
-  position: absolute;
-  @apply bg-gray-100;
+.h-modal > div > div > button[aria-label='Close'] {
+  @apply absolute right-[auto] rounded-[25px] top-[1.6rem] left-[1.2rem] bg-gray-100;
 }
 
 div.masonry {
@@ -113,4 +110,36 @@ div.masonry {
     border-radius: 0px !important;
     min-height: 100vh;
   }
+}
+
+.indicator {
+  margin-top: -2px;
+}
+
+.selectContainer {
+  @apply border-none text-[14px] rounded-lg !important;
+}
+
+.selectContainer.multiSelect > input {
+  @apply p-[15px] !important;
+}
+
+.selectContainer.focused {
+  @apply rounded-lg focus:ring-2 !important;
+}
+
+.selectContainer > input {
+  @apply ring-1 ring-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 !important;
+}
+
+.listItem {
+  @apply text-[14px];
+}
+
+.listItem > .item.active {
+  background-color: var(--bg-primary) !important;
+}
+
+.multiSelectItem {
+  margin-bottom: 5px !important;
 }
