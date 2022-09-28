@@ -52,11 +52,14 @@
     1200: {
       slidesPerView: 6,
     },
+    1400: {
+      slidesPerView: 6,
+    },
   }}
 >
   {#each items as item}
     <SwiperSlide
-      class="rounded-2xl cursor-pointer hover:bg-gray-50 transition duration-200 py-2"
+      class="rounded-2xl cursor-pointer hover:bg-gray-50 transition duration-200"
     >
       <div
         class="text-center text-[13px] text-zinc-600"

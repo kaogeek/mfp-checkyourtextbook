@@ -11,6 +11,8 @@
   import bongIconActive from '$assets/vectors/bong-active.svg';
   import notBongIconActive from '$assets/vectors/not-bong-active.svg';
   import { Common } from '$utils';
+  import { onMount } from 'svelte';
+  import { modalVote } from '$core';
 
   export let minColWidth: number = 280;
   let isOpenModal: boolean = false;
@@ -105,12 +107,9 @@
 </Masonry>
 
 {#if isOpenModal}
-  <ModalDetail bind:isOpenModal bind:dataModal />
+  <ModalDetail bind:isOpenModal bind:isOpenModalVote bind:dataModal />
 {/if}
 
 {#if isOpenModalVote}
   <ModalVote bind:isOpenModalVote bind:iconVote bind:data={dataModal} />
 {/if}
-
-<style>
-</style>

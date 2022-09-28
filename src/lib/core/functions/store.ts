@@ -7,3 +7,4 @@ export const searchCategory = writable('');
 
 export const contentStore = writable({});
 export const userStore = writable({});
+export const modalVote = writable(false);
