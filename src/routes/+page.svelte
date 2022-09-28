@@ -136,7 +136,7 @@
   <Searcher />
 </section>
 
-<section class="text-center mt-5 sm:hidden">
+<section class="text-center mt-5">
   <button
     type="button"
     class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-5 py-3 text-center"
