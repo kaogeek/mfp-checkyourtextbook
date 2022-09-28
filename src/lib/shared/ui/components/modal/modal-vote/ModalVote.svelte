@@ -10,19 +10,20 @@
 
   import { contentStore } from '$core';
 
-  export let isOpenModalVote: boolean;
+  export let isOpenModalVote: boolean = false;
   export let iconVote: string;
   export let data: ContentGrid;
-  let voteData = {
-    reason: '',
-    status: '',
-    name: '',
-    contentId: '',
-  };
-  let disabled: boolean = false;
   let disabledName: boolean = false;
 
-  voteData.status = iconVote;
+  import { form, field } from 'svelte-forms';
+  import { required } from 'svelte-forms/validators';
+
+  const reason = field('reason', '', [required()]);
+  const status = field('status', iconVote, [required()]);
+  const name = field('name', '', [required()]);
+  const contentId = field('contentId', data._id, [required()]);
+
+  const voteForm = form(reason, status, name, contentId);
 
   onMount(async () => {
     const userId = localStorage.getItem('userId');
@@ -32,34 +33,33 @@
         pathParams: [`?userId=${userId}`],
       });
 
-      if (user) disabledName = true;
-      voteData.name = user?.aliasName ?? '';
+      if (user) {
+        disabledName = true;
+        name.set(user?.aliasName ?? '');
+      }
     }
-
-    voteData.contentId = data._id;
   });
 
   async function vote() {
-    if (Object.values(voteData).every((value) => value)) {
-      disabled = true;
+    if (Object.values($voteForm).every((value) => value)) {
       const { user, content } = await apiCall(
         fetch,
         Endpoints.createEngagementComment,
         {
           method: 'POST',
-          body: JSON.stringify(voteData),
+          body: JSON.stringify($voteForm.summary),
         }
       );
 
-      localStorage.setItem('userId', user._id);
-      localStorage.setItem('name', user.aliasName);
+      if (user) {
+        localStorage.setItem('userId', user._id);
+        localStorage.setItem('name', user.aliasName);
+      }
 
       data = content;
 
-      disabled = false;
       contentStore.set(content);
       isOpenModalVote = !isOpenModalVote;
-    } else {
     }
   }
 </script>
@@ -68,11 +68,13 @@
   size="sm"
   autoclose={false}
   bind:open={isOpenModalVote}
-  on:hide={() => (isOpenModalVote = false)}
+  on:hide={() => {
+    isOpenModalVote = false;
+  }}
 >
   <div class="text-right invisible sm:visible">
     <Button
-      {disabled}
+      disabled={!Object.values($voteForm.summary).every((value) => value)}
       on:click={() => {
         vote();
       }}
@@ -93,19 +95,23 @@
     <Textarea
       placeholder="ทำไมถึงคิดว่า{iconVote === 'upvote' ? 'ไม่บ้ง' : 'บ้ง'}"
       rows={4}
-      bind:inputValue={voteData.reason}
+      bind:inputValue={$reason.value}
     />
     <Input
       label="ผู้แจ้งบ้ง"
       description="คุณคือหนึ่งในผู้ร่วมระดับการศึกษาไทย"
       placeholder="ไม่ต้องใส่ชื่อจริงมานะ"
-      size="sm"
-      customClass="h-12"
+      size="md"
+      customClass="h-13"
       bind:disabled={disabledName}
-      bind:inputValue={voteData.name}
+      bind:inputValue={$name.value}
     />
   </div>
   <div class="text-center sm:hidden">
-    <Button class="w-full" on:click={() => vote()}>บันทึก</Button>
+    <Button
+      class="w-full"
+      disabled={!Object.values($voteForm.summary).every((value) => value)}
+      on:click={() => vote()}>บันทึก</Button
+    >
   </div>
 </Modal>

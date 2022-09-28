@@ -24,10 +24,10 @@ export class Common {
   }
 
   static convertDateToString({ days, hours, minutes, seconds }: any) {
-    if (days) return `${days} วันที่แล้ว`;
-    if (hours) return `${hours} ชั่วโมงที่แล้ว`;
-    if (minutes) return `${minutes} นาทีที่แล้ว`;
-    if (seconds) return `${seconds} วินาทีที่แล้ว`;
+    if (days) return `${Math.round(days)} วันที่แล้ว`;
+    if (hours) return `${Math.round(hours)} ชั่วโมงที่แล้ว`;
+    if (minutes) return `${Math.round(minutes)} นาทีที่แล้ว`;
+    if (seconds) return `${Math.round(seconds)} วินาทีที่แล้ว`;
     return '';
   }
 }

@@ -3,6 +3,7 @@ import { HttpException } from '$utils';
 export enum Endpoints {
   createContent = '/api/content/create-post',
   getRecomTag = '/api/content/get-recom-tag',
+  getTagSearch = '/api/content/get-tag-search',
   getContent = '/api/content/get-post',
   getPrimaryClass = '/api/metadata/primary-class',
   getSecondaryClass = '/api/metadata/secondary-class',
@@ -11,7 +12,6 @@ export enum Endpoints {
   createEngagementComment = '/api/content/create-engagement-comment',
   createEngagementLike = '/api/content/create-engagement-like',
   getEngagementComment = '/api/content/get-engagement-comment',
-
 }
 
 type Props = {
