@@ -234,7 +234,7 @@
   bind:open={isOpenModalCreate}
   on:hide={() => (isOpenModalCreate = false)}
 >
-  <div class="text-right invisible sm:visible">
+  <div class="text-right">
     <Button
       disabled={!Object.values($postForm.summary).every((value) => value)}
       on:click={() => create()}>บันทึก</Button
