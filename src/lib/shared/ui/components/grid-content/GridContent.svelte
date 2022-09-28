@@ -11,14 +11,13 @@
   import bongIconActive from '$assets/vectors/bong-active.svg';
   import notBongIconActive from '$assets/vectors/not-bong-active.svg';
   import { Common } from '$utils';
-  import { onMount } from 'svelte';
-  import { modalVote } from '$core';
 
   export let minColWidth: number = 280;
   let isOpenModal: boolean = false;
   let isOpenModalVote: boolean = false;
   let iconVote: string = '';
   let dataModal: ContentGrid;
+  let clientWidth: number = 0;
 
   export let items: ContentGrid[] = [];
 
@@ -37,74 +36,76 @@
   }
 </script>
 
-<Masonry
-  let:item
-  {items}
-  idKey={'_id'}
-  {minColWidth}
-  maxColWidth={items.length > 3 ? undefined : 280}
-  gap={15}
-  animate={true}
-  duration={500}
->
-  <div
-    in:fade
-    out:fade
-    class="max-w-sm bg-white rounded-2xl shadow-md hover:scale-[1.02] transition duration-200 cursor-pointer"
+<div bind:clientWidth>
+  <Masonry
+    let:item
+    {items}
+    idKey={'_id'}
+    {minColWidth}
+    maxColWidth={clientWidth > 640 ? 330 : undefined}
+    gap={15}
+    animate={true}
+    duration={500}
   >
-    <section
-      on:click={() => {
-        isOpenModal = true;
-        dataModal = item;
-      }}
+    <div
+      in:fade
+      out:fade
+      class="max-w-sm bg-white rounded-2xl shadow-md hover:scale-[1.02] transition duration-200 cursor-pointer"
     >
-      <LazyImage
-        src={item.photo.url}
-        class="rounded-t-2xl mb-2 w-full max-h-[500px]"
-        placeholder="
+      <section
+        on:click={() => {
+          isOpenModal = true;
+          dataModal = item;
+        }}
+      >
+        <LazyImage
+          src={item.photo.url}
+          class="rounded-t-2xl mb-2 w-full max-h-[500px]"
+          placeholder="
   https://via.placeholder.com/{item.photo.size}/cccccc/969696?text=+"
-        alt={item.title}
-      />
-      <div class="px-3 py-1">
-        <P
-          align="left"
-          size="sm"
-          space="normal"
-          weight="normal"
-          opacity={1}
-          class="select-none text-[16px]">{item.title}</P
+          alt={item.title}
+        />
+        <div class="px-3 py-1">
+          <P
+            align="left"
+            size="sm"
+            space="normal"
+            weight="normal"
+            opacity={1}
+            class="select-none text-[16px]">{item.title}</P
+          >
+        </div>
+      </section>
+      <div class="flex m-2 space-x-3 pb-2">
+        <div
+          on:click={() => downvote(item)}
+          class="{item.downvote
+            ? 'text-[#FF6711]'
+            : 'text-zinc-300'} text-[13px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
         >
-      </div>
-    </section>
-    <div class="flex m-2 space-x-3 pb-2">
-      <div
-        on:click={() => downvote(item)}
-        class="{item.downvote
-          ? 'text-[#FF6711]'
-          : 'text-zinc-300'} text-[13px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
-      >
-        <Img
-          src={item.downvote ? bongIconActive : bongIcon}
-          class="w-[1.3rem]"
-        />&nbsp;{item.downvoteCount
-          ? Common.formatShort(item.downvoteCount)
-          : ''}
-      </div>
+          <Img
+            src={item.downvote ? bongIconActive : bongIcon}
+            class="w-[1.3rem]"
+          />&nbsp;{item.downvoteCount
+            ? Common.formatShort(item.downvoteCount)
+            : ''}
+        </div>
 
-      <div
-        on:click={() => upvote(item)}
-        class="{item.upvote
-          ? 'text-[#44A5FF]'
-          : 'text-zinc-300'} text-[13px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
-      >
-        <Img
-          src={item.upvote ? notBongIconActive : notBongIcon}
-          class="w-[1.3rem]"
-        />&nbsp;{item.upvoteCount ? Common.formatShort(item.upvoteCount) : ''}
+        <div
+          on:click={() => upvote(item)}
+          class="{item.upvote
+            ? 'text-[#44A5FF]'
+            : 'text-zinc-300'} text-[13px] flex items-center transition duration-150 ease-out px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100"
+        >
+          <Img
+            src={item.upvote ? notBongIconActive : notBongIcon}
+            class="w-[1.3rem]"
+          />&nbsp;{item.upvoteCount ? Common.formatShort(item.upvoteCount) : ''}
+        </div>
       </div>
     </div>
-  </div>
-</Masonry>
+  </Masonry>
+</div>
 
 {#if isOpenModal}
   <ModalDetail bind:isOpenModal bind:isOpenModalVote bind:dataModal />
