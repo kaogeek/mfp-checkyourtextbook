@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { searchStore } from '$core';
-  import apiCall, { Endpoints } from '$core/functions/call';
-  import type { ContentGrid } from '$models';
-  import { Heading } from 'flowbite-svelte';
-  import { onMount } from 'svelte';
+  import { searchStore } from "$core";
+  import apiCall, { Endpoints } from "$core/functions/call";
+  import type { ContentGrid } from "$models";
+  import { Heading } from "flowbite-svelte";
+  import { onMount } from "svelte";
 
   let timer: NodeJS.Timeout;
 
@@ -11,12 +11,20 @@
 
   onMount(async () => {
     [background] = await loadContentMost();
+    if (!background) [background] = await loadContentDefault();
   });
 
   async function loadContentMost(): Promise<ContentGrid[]> {
     return apiCall(fetch, Endpoints.getContent, {
-      method: 'GET',
+      method: "GET",
       pathParams: [`?searchCategory=hot`],
+    });
+  }
+
+  async function loadContentDefault(): Promise<ContentGrid[]> {
+    return apiCall(fetch, Endpoints.getContent, {
+      method: "GET",
+      pathParams: [`?searchCategory=most`],
     });
   }
 

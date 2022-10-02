@@ -1,25 +1,26 @@
 <script lang="ts">
-  import InfiniteLoading, { type InfiniteEvent } from 'svelte-infinite-loading';
+  import InfiniteLoading, { type InfiniteEvent } from "svelte-infinite-loading";
   import {
     SwiperSubject,
     GridContent,
     Searcher,
     Submenu,
     ModalCreate,
-  } from '$ui/components';
-  import { Heading, P } from 'flowbite-svelte';
-  import { Environments } from '$environment';
-  import type { ContentGrid, Subject } from '$models';
-  import apiCall, { Endpoints } from '$core/functions/call';
+  } from "$ui/components";
+  import { Heading, P } from "flowbite-svelte";
+  import { Environments } from "$environment";
+  import type { ContentGrid, Subject } from "$models";
+  import apiCall, { Endpoints } from "$core/functions/call";
   import {
     contentStore,
     searchCategory,
     searchClassStore,
     searchStore,
     searchSubjectStore,
-  } from '$core';
-  import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
+  } from "$core";
+  import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import liff from "@line/liff";
 
   let isOpenModalCreate: boolean = false;
 
@@ -28,10 +29,10 @@
   let page = 1;
   let contents: ContentGrid[] = [];
   let search = {
-    searchText: '',
-    searchClass: '',
-    searchSubject: '',
-    searchCategory: '',
+    searchText: "",
+    searchClass: "",
+    searchSubject: "",
+    searchCategory: "",
   };
   let initialSearch: boolean = false;
   let infiniteEventCustom: InfiniteEvent;
@@ -45,8 +46,36 @@
   }
 
   onMount(async () => {
+    if (import.meta.env.VITE_LINE_LIFF_ID) {
+      await liff
+        .init({
+          liffId: import.meta.env.VITE_LINE_LIFF_ID,
+        })
+        .then(async () => {
+          const profile = await liff.getProfile();
+
+          if (profile) {
+            const { user } = await apiCall(fetch, Endpoints.createUser, {
+              method: "POST",
+              body: JSON.stringify({
+                name: profile.displayName,
+                clientUUID: profile.userId,
+              }),
+            });
+
+            if (user) {
+              localStorage.setItem("userId", user._id);
+              localStorage.setItem("name", user.aliasName);
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
     subjects = await apiCall(fetch, Endpoints.getSubject, {
-      method: 'GET',
+      method: "GET",
     });
 
     searchClassStore.subscribe(async (value) => {
@@ -80,21 +109,21 @@
   });
 
   async function loadContents(): Promise<ContentGrid[]> {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
 
     return apiCall(fetch, Endpoints.getContent, {
-      method: 'GET',
+      method: "GET",
       pathParams: [
         `?page=${page}${
-          search.searchText ? `&searchText=${search.searchText}` : ''
-        }${userId ? `&userId=${userId}` : ''}${
-          search.searchClass ? `&searchClass=${search.searchClass}` : ''
+          search.searchText ? `&searchText=${search.searchText}` : ""
+        }${userId ? `&userId=${userId}` : ""}${
+          search.searchClass ? `&searchClass=${search.searchClass}` : ""
         }${
-          search.searchSubject ? `&searchSubject=${search.searchSubject}` : ''
+          search.searchSubject ? `&searchSubject=${search.searchSubject}` : ""
         }${
           search.searchCategory
             ? `&searchCategory=${search.searchCategory}`
-            : ''
+            : ""
         }`,
       ],
     });

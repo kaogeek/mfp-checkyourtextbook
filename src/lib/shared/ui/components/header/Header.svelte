@@ -86,7 +86,7 @@
       : ''} overflow-hidden flex justify-center duration-300 bg-gray-200 sm:bg-white"
   >
     <div
-      class=" flex items-center p-3 w-[100%] sm:w-[60vw] md:w-[60vw] md:w-[50vw]"
+      class=" flex items-center p-3 w-[100%] sm:w-[80vw] md:w-[60vw]  md:w-[50vw]"
     >
       <SwiperClass bind:items={primaryClass} />
     </div>

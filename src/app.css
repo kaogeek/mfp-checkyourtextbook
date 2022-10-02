@@ -1,14 +1,14 @@
 /* Write your global styles here, in PostCSS syntax */
-@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
 
 /* Import flowbite styles */
-@import 'flowbite/dist/flowbite.css';
+@import "flowbite/dist/flowbite.css";
 
 /* Import Swiper styles */
 
-@import 'swiper/css';
-@import 'swiper/css/pagination';
-@import 'swiper/css/navigation';
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
 
 /* Import tailwind styles */
 @tailwind base;
@@ -26,11 +26,11 @@
 }
 
 .custom-font-anakotmai {
-  font-family: 'Anakotmai', sans-serif;
+  font-family: "Anakotmai", sans-serif;
 }
 
 .custom-font-pracharath {
-  font-family: 'Pracharath', sans-serif;
+  font-family: "Pracharath", sans-serif;
 }
 
 p {
@@ -69,7 +69,7 @@ textarea {
 
 .swiper-slide img {
   display: block;
-  @apply h-20 w-full;
+  @apply w-full;
 }
 
 .swiper-button-next,
@@ -83,7 +83,7 @@ textarea {
   @apply text-[13px];
 }
 
-.h-modal > div > div > button[aria-label='Close'] {
+.h-modal > div > div > button[aria-label="Close"] {
   @apply absolute right-[auto] rounded-[25px] top-[1.6rem] left-[1.2rem] bg-gray-100;
 }
 

@@ -8,13 +8,14 @@ class Environments {
 
 class Configs {
   static COLLECTION_NAME = {
-    USER: 'users',
-    SUBJECT: 'subjects',
-    CONTENT: 'contents',
-    ENGAGEMENT: 'engagements',
-    ENGAGEMENT_COUNT: 'engagementCount',
-    CLASS: 'classes',
-    HASHTAG: 'hashtags',
+    USER: "users",
+    SUBJECT: "subjects",
+    CONTENT: "contents",
+    ENGAGEMENT: "engagements",
+    ENGAGEMENT_COUNT: "engagementCount",
+    CLASS: "classes",
+    HASHTAG: "hashtags",
+    REPORTING: "reportings",
   };
 }
 
