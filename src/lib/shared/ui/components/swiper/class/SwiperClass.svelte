@@ -1,16 +1,19 @@
 <script lang="ts">
-  import { Swiper, SwiperSlide } from 'swiper/svelte';
-  import { Img, P } from 'flowbite-svelte';
-  import { searchClassStore } from '$core';
+  import { Swiper, SwiperSlide } from "swiper/svelte";
+  import { Img, P } from "flowbite-svelte";
+  import { searchClassStore } from "$core";
 
-  import classIcon0 from '$assets/images/classes/0.svg';
-  import classIcon1 from '$assets/images/classes/1.svg';
-  import classIcon2 from '$assets/images/classes/2.svg';
-  import classIcon3 from '$assets/images/classes/3.svg';
-  import classIcon4 from '$assets/images/classes/4.svg';
-  import classIcon5 from '$assets/images/classes/5.svg';
+  import classIcon0 from "$assets/images/classes/0.svg";
+  import classIcon1 from "$assets/images/classes/1.svg";
+  import classIcon2 from "$assets/images/classes/2.svg";
+  import classIcon3 from "$assets/images/classes/3.svg";
+  import classIcon4 from "$assets/images/classes/4.svg";
+  import classIcon5 from "$assets/images/classes/5.svg";
 
   export let items: any[] = [];
+
+  let selected: string = "ทุกระดับชั้น";
+  let selectedCurrent: string = "ทุกระดับชั้น";
 
   function generateIcon(seq: number) {
     switch (seq) {
@@ -59,17 +62,39 @@
 >
   {#each items as item}
     <SwiperSlide
-      class="rounded-2xl cursor-pointer hover:bg-gray-50 transition duration-200"
+      class="rounded-2xl cursor-pointer transition duration-200 {selected ===
+      item.name
+        ? 'bg-[#ff6711]'
+        : ''}"
     >
       <div
-        class="text-center text-[13px] text-zinc-600"
+        class="text-center text-[13px]  {selected === item.name
+          ? 'text-white'
+          : 'text-zinc-600'}"
         on:click={() => {
-          searchClassStore.set(item.name === 'ทุกระดับชั้น' ? '' : item.name);
+          if (selectedCurrent !== item.name) {
+            selected = item.name;
+            selectedCurrent = selected;
+            searchClassStore.set(item.name === "ทุกระดับชั้น" ? "" : item.name);
+          } else {
+            selected = "";
+            searchClassStore.set("");
+          }
         }}
       >
-        <Img class="w-[80px]" src={generateIcon(item.seq)} alt={item.name} />
+        <img
+          class="w-[70px] {selected === item.name ? 'active' : ''}"
+          src={generateIcon(item.seq)}
+          alt={item.name}
+        />
         {item.name}
       </div>
     </SwiperSlide>
   {/each}
 </Swiper>
+
+<style>
+  .active {
+    filter: brightness(200%);
+  }
+</style>

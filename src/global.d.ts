@@ -8,4 +8,6 @@ interface ImportMetaEnv {
   VITE_AWS_ACCESS_KEY: string;
   VITE_AWS_SECRET_KEY: string;
   VITE_AWS_BUCKET: string;
+  VITE_LINE_LIFF_ID: string;
+
 }

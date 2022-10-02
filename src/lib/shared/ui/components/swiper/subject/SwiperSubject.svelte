@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition';
-  import { Heading, Img, P } from 'flowbite-svelte';
-  import { Navigation } from 'swiper';
-  import { Swiper, SwiperSlide } from 'swiper/svelte';
-  import type { Subject } from '$models';
-  import { searchSubjectStore } from '$core';
+  import { Heading, P } from "flowbite-svelte";
+  import { Navigation } from "swiper";
+  import { Swiper, SwiperSlide } from "swiper/svelte";
+  import type { Subject } from "$models";
+  import { searchSubjectStore } from "$core";
 
   export let items: Subject[] = [];
+
+  let selected: string = "";
+  let selectedCurrent: string = "";
 </script>
 
 <section>
@@ -49,11 +51,21 @@
           <div
             class="relative w-full"
             on:click={() => {
+              if (selectedCurrent !== subject.name) {
+                selected = subject.name;
+                selectedCurrent = selected;
+                searchSubjectStore.set(subject.name);
+              } else {
+                selected = "";
+                searchSubjectStore.set("");
+              }
               searchSubjectStore.set(subject.name);
             }}
           >
-            <Img
-              src={subject.thumbnail}
+            <img
+              src={selected === subject.name
+                ? "https://via.placeholder.com/300x300/ff6711/FFFFFF?text=+"
+                : subject.thumbnail}
               class="rounded-2xl h-20 w-full object-cover"
               alt={subject.name}
             />

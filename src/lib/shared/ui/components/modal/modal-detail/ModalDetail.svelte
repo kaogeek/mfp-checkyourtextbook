@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ContentGrid, EngagementComment } from '$models';
+  import type { ContentGrid, EngagementComment } from "$models";
   import {
     A,
     Card,
@@ -13,42 +13,43 @@
     TabHeadItem,
     TabWrapper,
     ToolbarButton,
-  } from 'flowbite-svelte';
-  import bongIconFull from '$assets/vectors/bong-full.svg';
-  import notBongIconFull from '$assets/vectors/not-bong-full.svg';
-  import bongIcon from '$assets/vectors/bong.svg';
-  import notBongIcon from '$assets/vectors/not-bong.svg';
-  import bongIconActive from '$assets/vectors/bong-active.svg';
-  import notBongIconActive from '$assets/vectors/not-bong-active.svg';
+  } from "flowbite-svelte";
+  import bongIconFull from "$assets/vectors/bong-full.svg";
+  import notBongIconFull from "$assets/vectors/not-bong-full.svg";
+  import bongIcon from "$assets/vectors/bong.svg";
+  import notBongIcon from "$assets/vectors/not-bong.svg";
+  import bongIconActive from "$assets/vectors/bong-active.svg";
+  import notBongIconActive from "$assets/vectors/not-bong-active.svg";
 
-  import likeIcon from '$assets/vectors/like.svg';
-  import dislikeIcon from '$assets/vectors/dislike.svg';
-  import likeIconActive from '$assets/vectors/like-active.svg';
-  import dislikeIconActive from '$assets/vectors/dislike-active.svg';
+  import likeIcon from "$assets/vectors/like.svg";
+  import dislikeIcon from "$assets/vectors/dislike.svg";
+  import likeIconActive from "$assets/vectors/like-active.svg";
+  import dislikeIconActive from "$assets/vectors/dislike-active.svg";
 
-  import zoomIcon from '$assets/vectors/zoom.svg';
-  import { Common } from '$utils';
-  import { LazyImage } from 'svelte-lazy-image';
-  import { ModalVote } from '../modal-vote';
-  import { fade } from 'svelte/transition';
-  import { Endpoints } from '$core';
-  import apiCall from '$core/functions/call';
-  import InfiniteLoading, { type InfiniteEvent } from 'svelte-infinite-loading';
-  import Masonry from 'svelte-bricks';
+  import zoomIcon from "$assets/vectors/zoom.svg";
+  import { Common } from "$utils";
+  import { LazyImage } from "svelte-lazy-image";
+  import { ModalVote } from "../modal-vote";
+  import { fade } from "svelte/transition";
+  import { Endpoints } from "$core";
+  import apiCall from "$core/functions/call";
+  import InfiniteLoading, { type InfiniteEvent } from "svelte-infinite-loading";
+  import Masonry from "svelte-bricks";
 
   export let isOpenModal: boolean = false;
   export let isOpenModalVote: boolean = false;
+  export let isOpenModalReporting: boolean = false;
   export let dataModal: ContentGrid;
   let comments: EngagementComment[] = [];
   let contents: ContentGrid[] = [];
   let hashtags = dataModal.hashtag;
-  let iconVote: string = '';
+  let iconVote: string = "";
   let isOpenComment: boolean = false;
   let pageComment = 1;
   let pageContent = 1;
   let infiniteEventCommentCustom: InfiniteEvent;
   let activeTabValue = 1;
-  let userId = localStorage.getItem('userId');
+  let userId = localStorage.getItem("userId");
   let clientHeight: number;
   let clientHeightActive: number;
   let clientWidth: number;
@@ -65,20 +66,26 @@
   };
 
   async function upvote(item: ContentGrid) {
-    iconVote = 'upvote';
+    iconVote = "upvote";
     dataModal = item;
 
     isOpenModal = false;
-
     isOpenModalVote = true;
   }
 
   function downvote(item: ContentGrid) {
-    iconVote = 'downvote';
+    iconVote = "downvote";
     dataModal = item;
 
     isOpenModal = false;
     isOpenModalVote = true;
+  }
+
+  function reporting(item: ContentGrid) {
+    dataModal = item;
+
+    isOpenModal = false;
+    isOpenModalReporting = true;
   }
 
   async function like(item: EngagementComment) {
@@ -87,12 +94,12 @@
     }
 
     const { comment } = await apiCall(fetch, Endpoints.createEngagementLike, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         userId: userId,
         commentId: item._id,
         contentId: item.contentId,
-        status: 'like',
+        status: "like",
       }),
     });
 
@@ -104,12 +111,12 @@
     if (!userId) return;
 
     const { comment } = await apiCall(fetch, Endpoints.createEngagementLike, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         userId: userId,
         commentId: item._id,
         contentId: item.contentId,
-        status: 'dislike',
+        status: "dislike",
       }),
     });
 
@@ -117,13 +124,11 @@
     if (index > -1 && comment) comments[index] = comment;
   }
 
-  async function reporting() {}
-
   async function loadContents(): Promise<ContentGrid[]> {
     return apiCall(fetch, Endpoints.getContent, {
-      method: 'GET',
+      method: "GET",
       pathParams: [
-        `?page=${pageContent}${userId ? `&userId=${userId}` : ''}&hashtag=${
+        `?page=${pageContent}${userId ? `&userId=${userId}` : ""}&hashtag=${
           dataModal.hashtag
         }&exclude=${dataModal._id}`,
       ],
@@ -132,11 +137,11 @@
 
   async function loadComments(): Promise<EngagementComment[]> {
     return apiCall(fetch, Endpoints.getEngagementComment, {
-      method: 'GET',
+      method: "GET",
       pathParams: [
-        `?page=${pageComment}${userId ? `&userId=${userId}` : ''}&contentId=${
+        `?page=${pageComment}${userId ? `&userId=${userId}` : ""}&contentId=${
           dataModal._id
-        }&type=${activeTabValue === 1 ? 'downvote' : 'upvote'}`,
+        }&type=${activeTabValue === 1 ? "downvote" : "upvote"}`,
       ],
     });
   }
@@ -212,29 +217,6 @@
           {hashtag}
         </span>
       {/each}
-    </div>
-
-    <div class="absolute top-0 right-5">
-      <ToolbarButton
-        class="dots-menu text-gray-900 bg-white dark:text-white dark:bg-gray-800"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-5 h-5"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-          /></svg
-        >
-      </ToolbarButton>
-      <Dropdown triggeredBy=".dots-menu">
-        <DropdownItem on:click={() => reporting()}>รายงาน</DropdownItem>
-      </Dropdown>
     </div>
 
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
@@ -316,7 +298,7 @@
               >
                 {dataModal.downvoteCount
                   ? Common.formatShort(dataModal.downvoteCount)
-                  : 'ไม่มี'}
+                  : "ไม่มี"}
               </div>
             </div>
 
@@ -332,8 +314,16 @@
               >
                 {dataModal.upvoteCount
                   ? Common.formatShort(dataModal.upvoteCount)
-                  : 'ไม่มี'}
+                  : "ไม่มี"}
               </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 my-4">
+            <div
+              on:click={() => reporting(dataModal)}
+              class="bg-gray-300 text-white flex flex-col items-center justify-center transition duration-150 ease-out cursor-pointer rounded-lg shadow-md"
+            >
+              <div class="flex py-2">รายงาน</div>
             </div>
           </div>
         </div>
@@ -350,7 +340,7 @@
             if (!isOpenComment) clientHeight = clientHeightActive;
           }}
           >{isOpenComment
-            ? 'ซ่อนความคิดเห็นทั้งหมด'
+            ? "ซ่อนความคิดเห็นทั้งหมด"
             : `ความคิดเห็นทั้งหมด (${
                 dataModal.downvoteCount + dataModal.upvoteCount
               })`}</button
@@ -459,7 +449,7 @@
                             src={comment.like ? likeIconActive : likeIcon}
                             class="w-[12px]"
                           />
-                          <span class={comment.like ? 'text-[#44A5FF]' : ''}
+                          <span class={comment.like ? "text-[#44A5FF]" : ""}
                             >{Common.formatCurrency(comment.likeCount)}</span
                           >
                         </div>
@@ -473,7 +463,7 @@
                               : dislikeIcon}
                             class="w-[13px]"
                           /><span
-                            class={comment.dislike ? 'text-[#FA2A4F]' : ''}
+                            class={comment.dislike ? "text-[#FA2A4F]" : ""}
                             >{Common.formatCurrency(comment.dislikeCount)}</span
                           >
                         </div>
@@ -494,7 +484,7 @@
         <Masonry
           let:item
           items={contents}
-          idKey={'_id'}
+          idKey={"_id"}
           minColWidth={200}
           maxColWidth={clientWidth > 640 ? 300 : undefined}
           gap={15}
