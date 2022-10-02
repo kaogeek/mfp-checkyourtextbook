@@ -11,6 +11,7 @@ async function getCollection() {
     engagements: db.collection(Configs.COLLECTION_NAME.ENGAGEMENT),
     engagementCount: db.collection(Configs.COLLECTION_NAME.ENGAGEMENT_COUNT),
     hashtags: db.collection(Configs.COLLECTION_NAME.HASHTAG),
+    reportings: db.collection(Configs.COLLECTION_NAME.REPORTING),
   };
 }
 
